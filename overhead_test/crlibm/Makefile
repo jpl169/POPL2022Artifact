@@ -8,7 +8,7 @@ obj = $(patsubst %, %, $(funcNames))
 all: $(obj)
 
 %: %.c
-	gcc -frounding-math -fsignaling-nans -O3 -std=c11 -I../../external/include/crlibm/ $^ ../../external/lib/libcrlibm.a -o $@
+	$(CC) -frounding-math -fsignaling-nans -O3 -std=c11 -I../../external/include/crlibm/ $^ ../../external/lib/libcrlibm.a -o $@
 
 clean:
 	rm -rf $(obj) *.dSYM
