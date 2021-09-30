@@ -14,7 +14,7 @@ typedef union {
     unsigned int x;
 } floatX;
 
-void RunTest() {
+void RunTest(const char* filename) {
   unsigned long count = 0;
   unsigned long totalTime = 0;
   unsigned long someCount = 0;
@@ -38,7 +38,8 @@ void RunTest() {
     totalTime += (t2 - t1);
     if (res == 0.0f) someCount++;
   }
-
-  printf("Aggregate cycles:          %lu\n", totalTime);
-  printf("someCount:                %lu\n", someCount);
+  
+  FILE* f = fopen(filename, "w");
+  fprintf(f, "%lu, %lu", totalTime, someCount);
+  fclose(f);
 }
