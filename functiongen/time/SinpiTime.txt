@@ -1,0 +1,5 @@
+jpl169@skylake:/filer/tmp1/jpl169/NewMathLibrary/functiongen/float34RO/ForLargePolynomial/scripts$ time ../SinpiLarge /filer/tmp1/jpl169/NewMathLibrary/intervals/Float34ROSinpiIntervalData sinpiResult/sinpi_2.log sinpiResult/sinpi_2.h 2
+
+real    2m35.163s
+user    2m31.325s
+sys     0m2.790s

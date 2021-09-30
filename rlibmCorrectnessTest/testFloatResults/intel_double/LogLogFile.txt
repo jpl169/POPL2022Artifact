@@ -1,0 +1,5 @@
+Number of Wrong Results for RNE rounding mode: 5
+Number of Wrong Results for RNN rounding mode: 1
+Number of Wrong Results for RNP rounding mode: 4
+Number of Wrong Results for RNZ rounding mode: 3
+Number of Wrong Results for RNA rounding mode: 2

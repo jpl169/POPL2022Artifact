@@ -1,0 +1,6 @@
+jpl169@skylake:/filer/tmp1/jpl169/NewMathLibrary/GenerateOracleFiles/float34RNDO$ time ./Sinh Float34
+ROSinhOracleData
+
+real    124m53.791s
+user    118m10.585s
+sys     0m33.834s

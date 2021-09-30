@@ -1,0 +1,11 @@
+count  = 3272998912
+rnd    = RNA
+x      = -1.50000000000000000000000000000000000000000000000000e+02
+oracle = 0.00000000000000000000000000000000000000000000000000e+00
+test   = 1.40129846432481707092372958328991613128026194187652e-45
+
+Number of Wrong Results for RNE rounding mode: 0
+Number of Wrong Results for RNN rounding mode: 0
+Number of Wrong Results for RNP rounding mode: 0
+Number of Wrong Results for RNZ rounding mode: 0
+Number of Wrong Results for RNA rounding mode: 1

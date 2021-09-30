@@ -1,0 +1,4 @@
+Checking for numExpBit = 7
+numExpBit: 7, bitlen: 25, count =              (wrong results: 0/0)numExpBit: 7, bitlen: 25, count =      3000000 (wrong results: 0/0)numExpBit: 7, bitlen: 25, count =      6000000 (wrong results: 0/0)numExpBit: 7, bitlen: 25, count =      9000000 (wrong results: 0/0)numExpBit: 7, bitlen: 25, count =     12000000 (wrong results: 0/0)numExpBit: 7, bitlen: 25, count =     15000000 (wrong results: 0/0)numExpBit: 7, bitlen: 25, count =     18000000 (wrong results: 0/0)numExpBit: 7, bitlen: 25, count =     21000000 (wrong results: 0/0)numExpBit: 7, bitlen: 25, count =     24000000 (wrong results: 0/0)numExpBit: 7, bitlen: 25, count =     27000000 (wrong results: 0/0)numExpBit: 7, bitlen: 25, count =     30000000 (wrong results: 0/0)numExpBit: 7, bitlen: 25, count =     33000000 (wrong results: 0/0)
+Number Of Wrong Result for Expbit 7: 0
+
