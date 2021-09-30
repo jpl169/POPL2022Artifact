@@ -8,7 +8,7 @@ obj = $(patsubst %, %, $(funcNames))
 all: $(obj)
 
 %: %.c
-	$(CC) -O3-std=c11 -fp-model strict -no-ftz -I../../../include $^ ../../../lib/float34ROMathLib.a -lm -no-ftz -o $@
+	$(CC) -O3-std=c11 -fp-model strict -no-ftz -I../../include $^ ../../lib/float34ROMathLib.a -lm -no-ftz -o $@
 
 clean:
 	rm -rf $(obj) *.dSYM
