@@ -8,7 +8,7 @@ obj = $(patsubst %, %, $(funcNames))
 all: $(obj)
 
 %: %.c
-	$(CC) -O3-std=c11 -no-ftz -fp-model strict $^ -no-ftz -o $@
+	$(CC) -O3 -std=c11 -no-ftz -fp-model strict $^ -no-ftz -o $@
 
 clean:
 	rm -rf $(obj) *.dSYM
