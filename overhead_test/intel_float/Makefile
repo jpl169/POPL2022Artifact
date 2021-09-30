@@ -8,7 +8,7 @@ obj = $(patsubst %, %, $(funcNames))
 all: $(obj)
 
 %: %.c
-	$(CC) -O3 -static -std=c11 -no-ftz -fp-model strict $^ $(ICCPATH)/compiler/latest/linux/compiler/lib/intel64/libimf.a -no-ftz -o $@
+	$(CC) -O3-std=c11 -no-ftz -fp-model strict $^ -no-ftz -o $@
 
 clean:
 	rm -rf $(obj) *.dSYM

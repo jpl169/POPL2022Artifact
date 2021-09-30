@@ -1,4 +1,4 @@
-CC = gcc
+CC = gcc-10
 
 funcNames = Log Log2 Log10 Exp Exp2 Exp10 Sinh Cosh Cospi Sinpi
 
