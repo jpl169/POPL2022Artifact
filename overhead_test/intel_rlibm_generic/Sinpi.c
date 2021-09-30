@@ -1,4 +1,4 @@
-#define	__ELEM__ rlibm_sinpi
+#define	__ELEM__ rlibm34_sinpi
 #include "LibTestHelper.h"
 
 int main(int argc, char** argv) {
