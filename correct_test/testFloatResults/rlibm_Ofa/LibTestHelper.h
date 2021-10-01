@@ -21,7 +21,7 @@ enum RoundMode my_rnd_modes[5] = {RNE, RNN, RNP, RNZ, RNA};
 float MpfrResult(float x, mpfr_rnd_t rnd) {
   if (rnd == MPFR_RNDNA) {
     int exact = mpfr_set_d(mval, x, MPFR_RNDZ);
-    if (mpfr_cmp_d(mval, result) != 0) {
+    if (mpfr_cmp_d(mval, x) != 0) {
       printf("what?\n");
     }
     exact = mpfr_subnormalize(mval, exact, MPFR_RNDZ);
