@@ -56,7 +56,7 @@ float RoundDoubleToF8N(double v, int bitlength, enum RoundMode rnd) {
     mantissa &= 0xFFFFFFFFF0000000;
     mantissa <<= 3lu;
     
-    if (exp < -126l) {
+    if (exp <= -126l) {
       long offset = -126l - exp;
       mantissa |= 0x0080000000000000;
       mantissa >>= (unsigned long)offset;
