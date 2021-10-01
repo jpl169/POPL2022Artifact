@@ -23,6 +23,12 @@ float RoundDoubleToF8N(double v, int bitlength, enum RoundMode rnd) {
 
   doubleint temp;
   temp.d = v;
+  
+  if (*(unsigned long*)&v == 0x380fd5165ef3fe01) {
+    printf("temp.d = %100e\n", temp.d);
+    printf("temp.x = %lx\n", temp.x);
+  }
+  
   // Take care of NaN and infinity
   if ((temp.x & 0x7FF0000000000000) == 0x7FF0000000000000) return v;
   
