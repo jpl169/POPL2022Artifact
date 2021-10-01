@@ -119,6 +119,11 @@ float RoundDoubleToF8N(double v, int bitlength, enum RoundMode rnd) {
   res.x = vminus;
   if (bitlength < 32) res.x <<= 32 - bitlength;
   res.x |= sign;
+  
+  if (*(unsigned long*)&v == 0x380fd5165ef3fe01) {
+    printf("res.x = %lx\n", res.x);
+  }
+  
   return res.f;
 }
 
