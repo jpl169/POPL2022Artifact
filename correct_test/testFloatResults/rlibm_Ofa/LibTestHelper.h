@@ -105,8 +105,9 @@ void RunTestForExponent() {
   }
   
   for (int i = 0; i < 5; i++) {
-    if (wrongCounts[i] == 0) printf("\033[0;32mo\033[0m   ");
-    else printf("\033[0;31mx\033[0m   ");
+    if (wrongCounts[i] == 0) printf("\033[0;32mo\033[0m");
+    else printf("\033[0;31mx\033[0m");
+    if (i < 4) printf("   ");
   }
   printf("\n");
   

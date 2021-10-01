@@ -8,7 +8,7 @@ obj = $(patsubst %, %, $(funcNames))
 all: $(obj)
 
 %: %.c
-	$(CC) -static -frounding-math -fsignaling-nans -O3 -std=c11 -I../../../helper/ -I../../../include/ -I../../../external/include/crlibm/ $^ ../../../external/lib/libcrlibm.a ../../../lib/float34ROMathLib.a -o $@
+	$(CC) -frounding-math -fsignaling-nans -O3 -std=c11 -I../../../helper/ -I../../../include/ -I../../../external/include/crlibm/ $^ ../../../external/lib/libcrlibm.a ../../../lib/float34ROMathLib.a -o $@
 
 clean:
 	rm -rf $(obj) *.dSYM

@@ -20,7 +20,7 @@ void RunTestForExponent(FILE* lfd) {
   
   floatX fx;
   
-  for (unsigned long count = 0x0; count < 0x100000000; count++) {
+  for (unsigned long count = 0x0; count < 0x100000000; count += 0x100) {
     fx.x = count;
     double orc = __GEN_ELEM__(fx.f);
     double res = __ELEM__(fx.f);
@@ -35,10 +35,11 @@ void RunTestForExponent(FILE* lfd) {
   }
   
   for (int i = 0; i < 5; i++) {
-    fprintf(lfd, "Number of Wrong Results for %s rounding mode: %lu\n",
-            rnd_modes_string[i],
-            wrongCounts[i]);
+    if (wrongCounts[i] == 0) printf("\033[0;32mo\033[0m");
+    else printf("\033[0;31mx\033[0m");
+    if (i < 4) printf("   ");
   }
+  printf("\n");
 }
 
 void RunTest(char* logFile) {

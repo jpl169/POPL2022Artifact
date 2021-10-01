@@ -36,10 +36,12 @@ void RunTestForExponent(FILE* lfd) {
   }
   
   for (int i = 0; i < 5; i++) {
-    fprintf(lfd, "Number of Wrong Results for %s rounding mode: %lu\n",
-            rnd_modes_string[i],
-            wrongCounts[i]);
+    if (wrongCounts[i] == 0) printf("\033[0;32mo\033[0m");
+    else printf("\033[0;31mx\033[0m");
+    if (i < 4) printf("   ");
   }
+  printf("\n");
+  
 }
 
 void RunTest(char* logFile) {
