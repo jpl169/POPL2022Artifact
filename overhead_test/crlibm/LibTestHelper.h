@@ -24,7 +24,7 @@ void RunTest(const char* filename) {
   float x, res;
   floatX xbase;
 
-  for (count = 0x0; count < 0x100000000; count += 1) {
+  for (count = 0x0; count < 0x100000000; count += 0x10) {
     xbase.x = count;
     x = xbase.f;
 
