@@ -66,6 +66,9 @@ float RoundDoubleToF8N(double v, int bitlength, enum RoundMode rnd) {
     }
 
     unsigned long infExt = ((unsigned long)exp << 55lu) | mantissa;
+    if (*(unsigned long*)&v == 0x380fd5165ef3fe01) {
+      printf("infExt = %lx\n", infExt);
+    }
     
     // 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
     // xxxx xxxx xxxx xxxx rsss ssss ssss ssss ssss ssss ssss ssss ssss ssss ssss ssss
