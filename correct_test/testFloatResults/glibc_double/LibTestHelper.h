@@ -41,7 +41,6 @@ void RunTestForExponent() {
     else printf("\033[0;31mx\033[0m");
     if (i < 4) printf("   ");
   }
-  printf("\n");
 
 }
 
