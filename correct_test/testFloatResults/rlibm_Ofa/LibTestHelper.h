@@ -38,7 +38,7 @@ float MpfrResult(float x, mpfr_rnd_t rnd) {
   exact = mpfr_subnormalize(mval, exact, rnd);
   float result = mpfr_get_flt(mval, rnd);
   if (mpfr_cmp_d(mval, result) != 0) {
-    printf("what2?\n");
+    printf("what3?\n");
   }
   return result;
 }
