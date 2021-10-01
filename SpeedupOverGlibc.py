@@ -16,7 +16,7 @@ rlibmRnoTime = []
 againstFloat = []
 againstDouble = []
 
-fileName = ["log.txt", "log2.txt", "log10.txt", "exp.txt", "exp2.txt", "exp10.txt", "siinh.txt", "cosh.txt"]
+fileName = ["log.txt", "log2.txt", "log10.txt", "exp.txt", "exp2.txt", "exp10.txt", "sinh.txt", "cosh.txt"]
 
 for i in range(0, 8) :
     fp = open("overhead_test/glibc_double/" + fileName[i], "r")
