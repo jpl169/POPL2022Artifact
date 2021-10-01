@@ -92,9 +92,9 @@ void RunTestForExponent() {
           printf("x      = %.50e\n", fx.f);
           printf("oracle = %.50e\n", oracleResult);
           printf("res    = %.100e\n", res);
-          printf("res    = %lx\n", *(unsigned long*)&res);
+          printf("res    = %lx\n", *(unsigned*)&res);
           printf("test   = %.50e\n\n", roundedRes);
-          printf("res    = %lx\n", *(unsigned long*)&roundedRes);
+          printf("res    = %lx\n", *(unsigned*)&roundedRes);
         }
         
       }
