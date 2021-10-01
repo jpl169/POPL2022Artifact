@@ -20,12 +20,12 @@ enum RoundMode my_rnd_modes[5] = {RNE, RNN, RNP, RNZ, RNA};
 
 float MpfrResult(float x, mpfr_rnd_t rnd) {
   if (rnd == MPFR_RNDNA) {
-    int exact = mpfr_set_d(mval2, x, MPFR_RNDZ);
+    int exact = mpfr_set_d(mval200, x, MPFR_RNDZ);
     
-    exact = __MPFR_ELEM__(mval, mval, MPFR_RNDZ);
-    exact = mpfr_check_range(mval, exact, MPFR_RNDZ);
-    exact = mpfr_subnormalize(mval, exact, MPFR_RNDZ);
-    double result = mpfr_get_d(mval, MPFR_RNDZ);
+    exact = __MPFR_ELEM__(mval200, mval, MPFR_RNDZ);
+    exact = mpfr_check_range(mval200, exact, MPFR_RNDZ);
+    exact = mpfr_subnormalize(mval200, exact, MPFR_RNDZ);
+    double result = mpfr_get_d(mval200, MPFR_RNDZ);
     return RoundDoubleToF8N(result, 32, RNA);
   }
   
@@ -46,7 +46,7 @@ void RunTestForExponent() {
   mpfr_set_emin(-148);
   mpfr_set_emax(128);
   mpfr_init2(mval, 24);
-  mpfr_init2(mval, 200);
+  mpfr_init2(mval200, 200);
   
   floatX fx;
   
