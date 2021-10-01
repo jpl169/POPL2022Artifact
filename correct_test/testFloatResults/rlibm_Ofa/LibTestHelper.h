@@ -14,7 +14,7 @@
 
 mpfr_t mval;
 
-mpfr_rnd_t rnd_modes[5] = {MPFR_RNDN, MPFR_RNDD, MPFR_RNDU, MPFR_RNDZ, MPFR_RNDN};
+mpfr_rnd_t rnd_modes[5] = {MPFR_RNDN, MPFR_RNDD, MPFR_RNDU, MPFR_RNDZ, MPFR_RNDNA};
 char* rnd_modes_string[5] = {"RNE", "RNN", "RNP", "RNZ", "RNA"};
 enum RoundMode my_rnd_modes[5] = {RNE, RNN, RNP, RNZ, RNA};
 
@@ -22,37 +22,17 @@ float MpfrResult(float x, mpfr_rnd_t rnd) {
 
   if (rnd == MPFR_RNDNA) {
     int exact = mpfr_set_d(mval, x, MPFR_RNDZ);
-    if (exact != 0) {
-      printf("uh oh... this value isn't exactly representable\n");
-      printf("x = %.100e\n", x);
-    }
     exact = mpfr_subnormalize(mval, exact, MPFR_RNDZ);
-    if (exact != 0) {
-      printf("uh oh... something going on with subnormal\n");
-      printf("x = %.100e\n", x);
-    }
     
     exact = mpfr_round_nearest_away(__MPFR_ELEM__, mval, mval);
     exact = mpfr_round_nearest_away(mpfr_check_range, mval, exact);
     exact = mpfr_round_nearest_away(mpfr_subnormalize, mval, exact);
-    double result = mpfr_get_d(mval, MPFR_RNDZ);
+    double result = mpfr_round_nearest_away(mpfr_get_d, mval);
     return result;
   }
   
   int exact = mpfr_set_d(mval, x, MPFR_RNDZ);
-  /*
-  if (exact != 0) {
-    fprintf(lfd, "uh oh... this value isn't exactly representable\n");
-    fprintf(lfd, "x = %.100e\n", x);
-  }
-   */
   exact = mpfr_subnormalize(mval, exact, MPFR_RNDZ);
-  /*
-  if (exact != 0) {
-    fprintf(lfd, "uh oh... something going on with subnormal\n");
-    fprintf(lfd, "x = %.100e\n", x);
-  }
-   */
 
   exact = __MPFR_ELEM__(mval, mval, rnd);
   exact = mpfr_check_range(mval, exact, rnd);
