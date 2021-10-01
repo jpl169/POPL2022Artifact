@@ -1,5 +1,0 @@
-Number of Wrong Results for RNE rounding mode: 151499
-Number of Wrong Results for RNN rounding mode: 1069545666
-Number of Wrong Results for RNP rounding mode: 1069549362
-Number of Wrong Results for RNZ rounding mode: 1069396517
-Number of Wrong Results for RNA rounding mode: 151499
