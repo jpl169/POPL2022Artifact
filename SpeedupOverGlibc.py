@@ -42,7 +42,7 @@ for i in range(0, 8) :
     fp.close()
 rlibmRnoTime.append(sum(rlibmRnoTime))
 
-for i in range(0, 8) :
+for i in range(0, 9) :
     againstFloat.append(glibcFloatTime[i] / rlibmRnoTime[i])
     againstDouble.append(glibcDoubleTime[i] / rlibmRnoTime[i])
 
