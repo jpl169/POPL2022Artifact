@@ -91,6 +91,7 @@ void RunTestForExponent() {
           printf("rnd    = %s\n", rnd_modes_string[rnd_index]);
           printf("x      = %.50e\n", fx.f);
           printf("oracle = %.50e\n", oracleResult);
+          printf("res    = %.50e\n", res);
           printf("test   = %.50e\n\n", roundedRes);
         }
         
