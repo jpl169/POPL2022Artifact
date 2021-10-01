@@ -23,7 +23,7 @@ for i in range(0, 8) :
     line = fp.readline()
     line = line.split(",")
     glibcDoubleTime.append(float(line[0]))
-    close(fp)
+    fp.close()
 glibcDoubleTime.append(sum(glibcDoubleTime))
     
 for i in range(0, 8) :
@@ -31,7 +31,7 @@ for i in range(0, 8) :
     line = fp.readline()
     line = line.split(",")
     glibcFloatTime.append(float(line[0]))
-    close(fp)
+    fp.close()
 glibcFloatTime.append(sum(glibcFloatTime))
 
 for i in range(0, 8) :
@@ -39,7 +39,7 @@ for i in range(0, 8) :
     line = fp.readline()
     line = line.split(",")
     rlibmRnoTime.append(float(line[0]))
-    close(fp)
+    fp.close()
 rlibmRnoTime.append(sum(rlibmRnoTime))
 
 for i in range(0, 8) :
