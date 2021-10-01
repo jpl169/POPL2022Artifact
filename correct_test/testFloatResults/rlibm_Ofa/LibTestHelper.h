@@ -27,7 +27,6 @@ float MpfrResult(float x, mpfr_rnd_t rnd) {
     exact = mpfr_round_nearest_away(mpfr_check_range, mval, exact);
     exact = mpfr_round_nearest_away(mpfr_subnormalize, mval, exact);
     double result = mpfr_get_d(mval, MPFR_RNDZ);
-    printf("hm...\n");
     return result;
   }
   
@@ -59,6 +58,11 @@ void RunTestForExponent() {
     for (int rnd_index = 0; rnd_index < 5; rnd_index++) {
       mpfr_rnd_t rnd = rnd_modes[rnd_index];
       float oracleResult = MpfrResult(fx.f, rnd);
+      
+      if (count == 3266227968) {
+        printf("oracleResult[%s] = %.100e\n", rnd_modes_string[rnd_index], oracleResult);
+      }
+      
       float roundedRes = RoundDoubleToF8N(res, 32, my_rnd_modes[rnd_index]);
       
       if (oracleResult != oracleResult && roundedRes != roundedRes) continue;
@@ -76,7 +80,6 @@ void RunTestForExponent() {
           printf("test   = %.50e\n\n", roundedRes);
           printf("res    = %x\n", *(unsigned*)&roundedRes);
         }
-        
       }
     }
   }
