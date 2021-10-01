@@ -23,12 +23,6 @@ float RoundDoubleToF8N(double v, int bitlength, enum RoundMode rnd) {
 
   doubleint temp;
   temp.d = v;
-  
-  if (*(unsigned long*)&v == 0x380fd5165ef3fe01) {
-    printf("temp.d = %.100e\n", temp.d);
-    printf("temp.x = %lx\n", temp.x);
-  }
-  
   // Take care of NaN and infinity
   if ((temp.x & 0x7FF0000000000000) == 0x7FF0000000000000) return v;
   
@@ -42,10 +36,6 @@ float RoundDoubleToF8N(double v, int bitlength, enum RoundMode rnd) {
   long exp = (temp.x >> 52lu) & 0x7FF;
   exp -= 1023l;
   unsigned long mantissa = temp.x & 0x000FFFFFFFFFFFFF;
-  
-  if (*(unsigned long*)&v == 0x380fd5165ef3fe01) {
-    printf("mantissa = %lx\n", mantissa);
-  }
   
   unsigned vminus = 0;
   unsigned roundBit = 0;
@@ -62,23 +52,9 @@ float RoundDoubleToF8N(double v, int bitlength, enum RoundMode rnd) {
     sticky = 1;
   } else {
     // double value is normal. Exp >= -150
-    if (*(unsigned long*)&v == 0x380fd5165ef3fe01) {
-      printf("mantissa = %lx\n", mantissa);
-    }
     if ((mantissa & 0x000000000FFFFFFF) != 0) sticky = 1;
-    if (*(unsigned long*)&v == 0x380fd5165ef3fe01) {
-      printf("mantissa = %lx\n", mantissa);
-    }
     mantissa &= 0xFFFFFFFFF0000000;
-    if (*(unsigned long*)&v == 0x380fd5165ef3fe01) {
-      printf("mantissa = %lx\n", mantissa);
-    }
     mantissa <<= 3lu;
-    
-    if (*(unsigned long*)&v == 0x380fd5165ef3fe01) {
-      printf("mantissa = %lx\n", mantissa);
-      printf("exp = %ld\n", exp);
-    }
     
     if (exp < -126l) {
       long offset = -126l - exp;
@@ -90,9 +66,6 @@ float RoundDoubleToF8N(double v, int bitlength, enum RoundMode rnd) {
     }
 
     unsigned long infExt = ((unsigned long)exp << 55lu) | mantissa;
-    if (*(unsigned long*)&v == 0x380fd5165ef3fe01) {
-      printf("infExt = %lx\n", infExt);
-    }
     
     // 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000
     // xxxx xxxx xxxx xxxx rsss ssss ssss ssss ssss ssss ssss ssss ssss ssss ssss ssss
@@ -100,13 +73,6 @@ float RoundDoubleToF8N(double v, int bitlength, enum RoundMode rnd) {
     infExt >>= (63lu - (unsigned long)bitlength);
     roundBit = infExt & 0x1;
     vminus = (unsigned)(infExt >> 1lu);
-  }
-  
-  if (*(unsigned long*)&v == 0x380fd5165ef3fe01) {
-    printf("mantissa = %lx\n", mantissa);
-    printf("vminus = %x\n", vminus);
-    printf("roundbit = %d\n", roundBit);
-    printf("sticky = %d\n", sticky);
   }
   
   unsigned lastBit = vminus & 0x1;
@@ -134,11 +100,6 @@ float RoundDoubleToF8N(double v, int bitlength, enum RoundMode rnd) {
   res.x = vminus;
   if (bitlength < 32) res.x <<= 32 - bitlength;
   res.x |= sign;
-  
-  if (*(unsigned long*)&v == 0x380fd5165ef3fe01) {
-    printf("res.x = %lx\n", res.x);
-  }
-  
   return res.f;
 }
 

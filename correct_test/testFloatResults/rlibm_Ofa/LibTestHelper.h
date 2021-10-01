@@ -14,7 +14,7 @@
 
 mpfr_t mval;
 
-mpfr_rnd_t rnd_modes[5] = {MPFR_RNDN, MPFR_RNDD, MPFR_RNDU, MPFR_RNDZ, MPFR_RNDNA};
+mpfr_rnd_t rnd_modes[5] = {MPFR_RNDN, MPFR_RNDD, MPFR_RNDU, MPFR_RNDZ, MPFR_RNDN};
 char* rnd_modes_string[5] = {"RNE", "RNN", "RNP", "RNZ", "RNA"};
 enum RoundMode my_rnd_modes[5] = {RNE, RNN, RNP, RNZ, RNA};
 
