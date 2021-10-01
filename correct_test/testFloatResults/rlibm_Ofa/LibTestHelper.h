@@ -56,6 +56,7 @@ void RunTestForExponent() {
       float oracleResult = MpfrResult(fx.f, rnd);
       
       if (count == 3266227968) {
+        printf("input       [%s] = %.100e\n", rnd_modes_string[rnd_index], fx.f);
         printf("oracleResult[%s] = %.100e\n", rnd_modes_string[rnd_index], oracleResult);
       }
       
