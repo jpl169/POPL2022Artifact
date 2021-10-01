@@ -20,9 +20,9 @@ for i in range(0, len(fileName)) :
     fp = open("overhead_test/crlibm/" + fileName[i], "r")
     line = fp.readline()
     line = line.split(",")
-    glibcDoubleTime.append(float(line[0]))
+    glibcFloatTime.append(float(line[0]))
     fp.close()
-glibcDoubleTime.append(sum(glibcDoubleTime))
+glibcFloatTime.append(sum(glibcFloatTime))
     
 for i in range(0, len(fileName)) :
     fp = open("overhead_test/glibc_double/" + fileName[i], "r")
@@ -60,4 +60,4 @@ ax.yaxis.set_major_formatter(ticker.FormatStrFormatter('$%.f x$'))
 fig.tight_layout()
 
 plt.gcf().set_size_inches(5, 1.2)
-plt.savefig('SpeedupOverIntel.pdf', bbox_inches='tight', pad_inches = -0.001)
+plt.savefig('SpeedupOverCrlibm.pdf', bbox_inches='tight', pad_inches = -0.001)
