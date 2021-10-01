@@ -22,7 +22,7 @@ float MpfrResult(float x, mpfr_rnd_t rnd) {
   if (rnd == MPFR_RNDNA) {
     int exact = mpfr_set_d(mval200, x, MPFR_RNDZ);
     
-    exact = __MPFR_ELEM__(mval200, mval, MPFR_RNDZ);
+    exact = __MPFR_ELEM__(mval200, mval200, MPFR_RNDZ);
     exact = mpfr_check_range(mval200, exact, MPFR_RNDZ);
     exact = mpfr_subnormalize(mval200, exact, MPFR_RNDZ);
     double result = mpfr_get_d(mval200, MPFR_RNDZ);
