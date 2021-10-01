@@ -3,6 +3,6 @@
 
 
 int main(int argc, char** argv) {
-  RunTest();
+  RunTest("log10.txt");
   return 0;
 }

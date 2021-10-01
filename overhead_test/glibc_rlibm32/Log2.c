@@ -2,6 +2,6 @@
 #include "LibTestHelper.h"
 
 int main(int argc, char** argv) {
-  RunTest();
+  RunTest("log2.txt");
   return 0;
 }

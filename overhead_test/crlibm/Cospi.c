@@ -2,6 +2,6 @@
 #include "LibTestHelper.h"
 
 int main(int argc, char** argv) {
-    RunTest();
+    RunTest("cospi.txt");
     return 0;
 }
