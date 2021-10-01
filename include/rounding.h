@@ -37,6 +37,10 @@ float RoundDoubleToF8N(double v, int bitlength, enum RoundMode rnd) {
   exp -= 1023l;
   unsigned long mantissa = temp.x & 0x000FFFFFFFFFFFFF;
   
+  if (*(unsigned long*)&v == 0x380fd5165ef3fe01) {
+    printf("mantissa = %lx\n", mantissa);
+  }
+  
   unsigned vminus = 0;
   unsigned roundBit = 0;
   unsigned sticky = 0;
@@ -55,6 +59,11 @@ float RoundDoubleToF8N(double v, int bitlength, enum RoundMode rnd) {
     if ((mantissa & 0x000000000FFFFFFF) != 0) sticky = 1;
     mantissa &= 0xFFFFFFFFF0000000;
     mantissa <<= 3lu;
+    
+    if (*(unsigned long*)&v == 0x380fd5165ef3fe01) {
+      printf("mantissa = %lx\n", mantissa);
+      printf("exp = %ld\n", exp);
+    }
     
     if (exp < -126l) {
       long offset = -126l - exp;
