@@ -1,5 +1,5 @@
 #!/bin/bash
-cd ../rlibm_Ofa
+cd rlibm_Ofa
 make clean
 make -s
 cd ../glibc_double
@@ -8,7 +8,7 @@ make -s
 cd ../intel_double
 make clean
 make -s
-cd crlibm
+cd ../crlibm
 make clean
 make -s
 cd ../rlibm32
