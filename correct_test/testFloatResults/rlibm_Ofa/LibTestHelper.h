@@ -13,7 +13,7 @@
 #include "mpfr.h"
 
 mpfr_t mval, mval200;
-int default_emin; default_emax;
+int default_emin, default_emax;
 
 mpfr_rnd_t rnd_modes[5] = {MPFR_RNDN, MPFR_RNDD, MPFR_RNDU, MPFR_RNDZ, MPFR_RNDNA};
 char* rnd_modes_string[5] = {"RNE", "RNN", "RNP", "RNZ", "RNA"};
