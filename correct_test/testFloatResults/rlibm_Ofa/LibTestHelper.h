@@ -85,21 +85,15 @@ void RunTestForExponent() {
       if (oracleResult != roundedRes) {
         wrongCounts[rnd_index]++;
         
-        /*
+        
         if (wrongCounts[rnd_index] <= 5) {
-          fprintf(lfd, "count  = %lu\n", count);
-          fprintf(lfd, "rnd    = %s\n", rnd_modes_string[rnd_index]);
-          fprintf(lfd, "x      = %.50e\n", fx.f);
-          fprintf(lfd, "oracle = %.50e\n", oracleResult);
-          fprintf(lfd, "test   = %.50e\n\n", roundedRes);
-          
           printf("count  = %lu\n", count);
           printf("rnd    = %s\n", rnd_modes_string[rnd_index]);
           printf("x      = %.50e\n", fx.f);
           printf("oracle = %.50e\n", oracleResult);
           printf("test   = %.50e\n\n", roundedRes);
         }
-         */
+        
       }
     }
   }
