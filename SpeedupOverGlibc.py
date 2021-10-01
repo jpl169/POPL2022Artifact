@@ -43,8 +43,8 @@ for i in range(0, 8) :
 rlibmRnoTime.append(sum(rlibmRnoTime))
 
 for i in range(0, 8) :
-    againstFloat(glibcFloatTime[i] / rlibmRnoTime[i])
-    againstDouble(glibcDoubleTime[i] / rlibmRnoTime[i])
+    againstFloat.append(glibcFloatTime[i] / rlibmRnoTime[i])
+    againstDouble.append(glibcDoubleTime[i] / rlibmRnoTime[i])
 
 
 
