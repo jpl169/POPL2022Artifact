@@ -25,7 +25,7 @@ for i in range(0, len(fileName)) :
 glibcFloatTime.append(sum(glibcFloatTime))
     
 for i in range(0, len(fileName)) :
-    fp = open("overhead_test/glibc_double/" + fileName[i], "r")
+    fp = open("overhead_test/glibc_rlibm_generic/" + fileName[i], "r")
     line = fp.readline()
     line = line.split(",")
     rlibmRnoTime.append(float(line[0]))
