@@ -13,6 +13,7 @@
 #include "mpfr.h"
 
 mpfr_t mval, mval200;
+int default_emin; default_emax;
 
 mpfr_rnd_t rnd_modes[5] = {MPFR_RNDN, MPFR_RNDD, MPFR_RNDU, MPFR_RNDZ, MPFR_RNDNA};
 char* rnd_modes_string[5] = {"RNE", "RNN", "RNP", "RNZ", "RNA"};
@@ -20,13 +21,16 @@ enum RoundMode my_rnd_modes[5] = {RNE, RNN, RNP, RNZ, RNA};
 
 float MpfrResult(float x, mpfr_rnd_t rnd) {
   if (rnd == MPFR_RNDNA) {
+    mpfr_set_emin(default_emin);
+    mpfr_set_emax(default_emax);
     int exact = mpfr_set_d(mval200, x, MPFR_RNDZ);
-    
     exact = __MPFR_ELEM__(mval200, mval200, MPFR_RNDZ);
     double result = mpfr_get_d(mval200, MPFR_RNDZ);
     return RoundDoubleToF8N(result, 32, RNA);
   }
   
+  mpfr_set_emin(-148);
+  mpfr_set_emax(128);
   int exact = mpfr_set_d(mval, x, MPFR_RNDZ);
   exact = mpfr_subnormalize(mval, exact, MPFR_RNDZ);
 
@@ -39,12 +43,11 @@ float MpfrResult(float x, mpfr_rnd_t rnd) {
 void RunTestForExponent() {
   unsigned long wrongCounts[5];
   for (int i = 0; i < 5; i++) wrongCounts[i] = 0;
-      
-  mpfr_set_default_prec(24);
-  mpfr_set_emin(-148);
-  mpfr_set_emax(128);
+  
   mpfr_init2(mval, 24);
   mpfr_init2(mval200, 200);
+  default_emin = mpfr_get_emin();
+  default_emax = mpfr_get_emax();
   
   floatX fx;
   
