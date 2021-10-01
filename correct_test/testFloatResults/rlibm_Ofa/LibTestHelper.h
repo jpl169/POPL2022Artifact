@@ -72,12 +72,7 @@ void RunTestForExponent() {
   
   floatX fx;
   
-  for (unsigned long count = 0x0; count < 0x100000000; count += 0x400) {
-    if ((count % 1000000) == 0) {
-      printf("count = %lu\r", count);
-      fflush(stdout);
-    }
-    
+  for (unsigned long count = 0x0; count < 0x100000000; count += 0x100) {    
     fx.x = count;
     double res = __ELEM__(fx.f);
     
