@@ -21,8 +21,8 @@ enum RoundMode my_rnd_modes[5] = {RNE, RNN, RNP, RNZ, RNA};
 float MpfrResult(float x, mpfr_rnd_t rnd) {
   if (rnd == MPFR_RNDNA) {
     int exact = mpfr_set_d(mval, x, MPFR_RNDZ);
-    exact = mpfr_round_nearest_away(__MPFR_ELEM__, mval, mval);
-    double result = mpfr_get_d(mval, MPFR_RNDZ);
+    exact = mpfr_round_nearest_away(mpfr_exp, mval, mval);
+    float result = mpfr_get_flt(mval, MPFR_RNDZ);
     return result;
   }
   
@@ -32,7 +32,7 @@ float MpfrResult(float x, mpfr_rnd_t rnd) {
   exact = __MPFR_ELEM__(mval, mval, rnd);
   exact = mpfr_check_range(mval, exact, rnd);
   exact = mpfr_subnormalize(mval, exact, rnd);
-  double result = mpfr_get_d(mval, rnd);
+  float result = mpfr_get_flt(mval, rnd);
   return result;
 }
 
@@ -65,7 +65,6 @@ void RunTestForExponent() {
       if (oracleResult != oracleResult && roundedRes != roundedRes) continue;
       if (oracleResult != roundedRes) {
         wrongCounts[rnd_index]++;
-        
         
         if (wrongCounts[rnd_index] <= 5) {
           printf("count  = %lu\n", count);
