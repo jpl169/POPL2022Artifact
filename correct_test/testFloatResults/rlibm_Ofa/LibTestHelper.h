@@ -94,6 +94,7 @@ void RunTestForExponent() {
           printf("res    = %.100e\n", res);
           printf("res    = %lx\n", *(unsigned long*)&res);
           printf("test   = %.50e\n\n", roundedRes);
+          printf("res    = %lx\n", *(unsigned long*)&roundedRes);
         }
         
       }
