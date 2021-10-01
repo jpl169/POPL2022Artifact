@@ -78,8 +78,8 @@ void RunTestForExponent() {
     
     for (int rnd_index = 0; rnd_index < 5; rnd_index++) {
       mpfr_rnd_t rnd = rnd_modes[rnd_index];
-      double oracleResult = MpfrResult(fx.f, rnd);
-      double roundedRes = RoundDoubleToF8N(res, 32, my_rnd_modes[rnd_index]);
+      float oracleResult = MpfrResult(fx.f, rnd);
+      float roundedRes = RoundDoubleToF8N(res, 32, my_rnd_modes[rnd_index]);
       
       if (oracleResult != oracleResult && roundedRes != roundedRes) continue;
       if (oracleResult != roundedRes) {
