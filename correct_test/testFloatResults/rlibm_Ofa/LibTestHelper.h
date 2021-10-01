@@ -52,7 +52,7 @@ void RunTestForExponent() {
   mpfr_set_default_prec(24);
   mpfr_set_emin(-148);
   mpfr_set_emax(128);
-  mpfr_init3(mval, 24);
+  mpfr_init2(mval, 24);
   
   floatX fx;
   
