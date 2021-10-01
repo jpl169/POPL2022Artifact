@@ -19,7 +19,6 @@ char* rnd_modes_string[5] = {"RNE", "RNN", "RNP", "RNZ", "RNA"};
 enum RoundMode my_rnd_modes[5] = {RNE, RNN, RNP, RNZ, RNA};
 
 float MpfrResult(float x, mpfr_rnd_t rnd) {
-
   if (rnd == MPFR_RNDNA) {
     int exact = mpfr_set_d(mval, x, MPFR_RNDZ);
     exact = mpfr_subnormalize(mval, exact, MPFR_RNDZ);
@@ -27,7 +26,10 @@ float MpfrResult(float x, mpfr_rnd_t rnd) {
     exact = mpfr_round_nearest_away(__MPFR_ELEM__, mval, mval);
     exact = mpfr_round_nearest_away(mpfr_check_range, mval, exact);
     exact = mpfr_round_nearest_away(mpfr_subnormalize, mval, exact);
-    double result = mpfr_round_nearest_away(mpfr_get_d, mval);
+    double result = mpfr_get_d(mval, MPFR_RNDZ);
+    if (mpfr_cmp_d(mval, result) != 0) {
+      printf("Why are they different?\n");
+    }
     return result;
   }
   
