@@ -25,7 +25,7 @@ float RoundDoubleToF8N(double v, int bitlength, enum RoundMode rnd) {
   temp.d = v;
   
   if (*(unsigned long*)&v == 0x380fd5165ef3fe01) {
-    printf("temp.d = %100e\n", temp.d);
+    printf("temp.d = %.100e\n", temp.d);
     printf("temp.x = %lx\n", temp.x);
   }
   
