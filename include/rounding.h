@@ -75,7 +75,7 @@ float RoundDoubleToF8N(double v, int bitlength, enum RoundMode rnd) {
     vminus = (unsigned)(infExt >> 1lu);
   }
   
-  if (*(unsigned long*)&v = 0x380fd5165ef3fe01) {
+  if (*(unsigned long*)&v == 0x380fd5165ef3fe01) {
     printf("mantissa = %lx\n", mantissa);
     printf("vminus = %x\n", vminus);
     printf("roundbit = %d\n", roundBit);
