@@ -24,11 +24,7 @@ float MpfrResult(float x, mpfr_rnd_t rnd) {
     exact = mpfr_subnormalize(mval, exact, MPFR_RNDZ);
     
     exact = mpfr_round_nearest_away(__MPFR_ELEM__, mval, mval);
-    exact = mpfr_round_nearest_away(mpfr_subnormalize, mval, exact);
     double result = mpfr_get_d(mval, MPFR_RNDZ);
-    if (result != (float)result) {
-      printf("what2?\n");
-    }
     return result;
   }
   
