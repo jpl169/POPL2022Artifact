@@ -46,6 +46,9 @@ for i in range(0, 8) :
     againstFloat.append(glibcFloatTime[i] / rlibmRnoTime[i])
     againstDouble.append(glibcDoubleTime[i] / rlibmRnoTime[i])
 
+print(againstFloat)
+print(againstDouble)
+
 
 
 x = np.arange(len(labels))  # the label locations
