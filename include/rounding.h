@@ -56,8 +56,17 @@ float RoundDoubleToF8N(double v, int bitlength, enum RoundMode rnd) {
     sticky = 1;
   } else {
     // double value is normal. Exp >= -150
+    if (*(unsigned long*)&v == 0x380fd5165ef3fe01) {
+      printf("mantissa = %lx\n", mantissa);
+    }
     if ((mantissa & 0x000000000FFFFFFF) != 0) sticky = 1;
+    if (*(unsigned long*)&v == 0x380fd5165ef3fe01) {
+      printf("mantissa = %lx\n", mantissa);
+    }
     mantissa &= 0xFFFFFFFFF0000000;
+    if (*(unsigned long*)&v == 0x380fd5165ef3fe01) {
+      printf("mantissa = %lx\n", mantissa);
+    }
     mantissa <<= 3lu;
     
     if (*(unsigned long*)&v == 0x380fd5165ef3fe01) {
