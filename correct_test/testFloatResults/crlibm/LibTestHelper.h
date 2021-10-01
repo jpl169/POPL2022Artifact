@@ -21,6 +21,9 @@ void RunTestForExponent(FILE* lfd) {
   floatX fx;
   
   for (unsigned long count = 0x0; count < 0x100000000; count += 0x100) {
+    if (count % 1000000 == 0) {
+      printf("count = %llu\r", count);
+    }
     fx.x = count;
     double orc = __GEN_ELEM__(fx.f);
     double res = __ELEM__(fx.f);
