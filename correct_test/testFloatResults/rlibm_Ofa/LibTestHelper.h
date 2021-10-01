@@ -21,9 +21,6 @@ enum RoundMode my_rnd_modes[5] = {RNE, RNN, RNP, RNZ, RNA};
 float MpfrResult(float x, mpfr_rnd_t rnd) {
   if (rnd == MPFR_RNDNA) {
     int exact = mpfr_set_d(mval, x, MPFR_RNDZ);
-    if (mpfr_cmp_d(mval, x) != 0) {
-      printf("what?\n");
-    }
     exact = mpfr_subnormalize(mval, exact, MPFR_RNDZ);
     
     exact = mpfr_round_nearest_away(__MPFR_ELEM__, mval, mval);
@@ -42,6 +39,9 @@ float MpfrResult(float x, mpfr_rnd_t rnd) {
   exact = __MPFR_ELEM__(mval, mval, rnd);
   exact = mpfr_subnormalize(mval, exact, rnd);
   float result = mpfr_get_flt(mval, rnd);
+  if (mpfr_cmp_d(mval, result) != 0) {
+    printf("what2?\n");
+  }
   return result;
 }
 
