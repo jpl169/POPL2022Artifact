@@ -21,12 +21,15 @@ enum RoundMode my_rnd_modes[5] = {RNE, RNN, RNP, RNZ, RNA};
 
 float MpfrResult(float x, mpfr_rnd_t rnd) {
   if (rnd == MPFR_RNDNA) {
+    unsigned sticky = 0;
     mpfr_set_emin(default_emin);
     mpfr_set_emax(default_emax);
     int exact = mpfr_set_d(mval200, x, MPFR_RNDZ);
     exact = __MPFR_ELEM__(mval200, mval200, MPFR_RNDZ);
+    if (exact != 0) sticky = 1;
     double result = mpfr_get_d(mval200, MPFR_RNDZ);
-    return RoundDoubleToF8N(result, 32, RNA);
+    if (mpfr_cmp_d(mval200, result) != 0) sticky = 1;
+    return RoundDoubleToF8NWithSticky(result, 32, RNA, sticky);
   }
   
   mpfr_set_emin(-148);
@@ -45,7 +48,7 @@ void RunTestForExponent() {
   for (int i = 0; i < 5; i++) wrongCounts[i] = 0;
   
   mpfr_init2(mval, 24);
-  mpfr_init2(mval200, 200);
+  mpfr_init2(mval200, 25);
   default_emin = mpfr_get_emin();
   default_emax = mpfr_get_emax();
   
@@ -58,12 +61,6 @@ void RunTestForExponent() {
     for (int rnd_index = 0; rnd_index < 5; rnd_index++) {
       mpfr_rnd_t rnd = rnd_modes[rnd_index];
       float oracleResult = MpfrResult(fx.f, rnd);
-      
-      if (count == 3266227968) {
-        printf("input       [%s] = %.100e\n", rnd_modes_string[rnd_index], fx.f);
-        printf("oracleResult[%s] = %.100e\n", rnd_modes_string[rnd_index], oracleResult);
-      }
-      
       float roundedRes = RoundDoubleToF8N(res, 32, my_rnd_modes[rnd_index]);
       
       if (oracleResult != oracleResult && roundedRes != roundedRes) continue;
