@@ -72,7 +72,7 @@ void RunTestForExponent() {
   
   floatX fx;
   
-  for (unsigned long count = 0x0; count < 0x100000000; count += 0x100) {    
+  for (unsigned long count = 0x0; count < 0x100000000; count += 0x100) {
     fx.x = count;
     double res = __ELEM__(fx.f);
     
@@ -91,7 +91,7 @@ void RunTestForExponent() {
           printf("rnd    = %s\n", rnd_modes_string[rnd_index]);
           printf("x      = %.50e\n", fx.f);
           printf("oracle = %.50e\n", oracleResult);
-          printf("res    = %.50e\n", res);
+          printf("res    = %.100e\n", res);
           printf("test   = %.50e\n\n", roundedRes);
         }
         
