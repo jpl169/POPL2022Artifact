@@ -333,6 +333,8 @@ float RoundDoubleToFEN(double v, int explength, int bitlength, enum RoundMode rn
   }
   
   if (v == 6.9314718055994528622676398299518041312694549560546875e-01) {
+    printf("explen = %d\n", explength);
+    printf("bitlen = %d\n", bitlength);
     printf("vminus = %x\n", vminus);
   }
   
