@@ -4,7 +4,7 @@ echo    "| function |    Using OurLibm    |    glibc dbl libm   |   Intel dbl li
 echo    "----------------------------------------------------------------------------"
 echo    "|          | rne rnn rnp rnz rna | rne rnn rnp rnz rna | rne rnn rnp rnz rna |"
 echo -n "| ln(x)    |  "
-./rlibm_Ofa/Log
+echo -n "                 "
 echo -n "  |  "
 ./glibc_double/Log
 echo -n "  |  "
@@ -12,7 +12,7 @@ echo -n "  |  "
 echo    "  |"
 
 echo -n "| log2(x)  |  "
-./rlibm_Ofa/Log2
+echo -n "                 "
 echo -n "  |  "
 ./glibc_double/Log2
 echo -n "  |  "
@@ -20,7 +20,7 @@ echo -n "  |  "
 echo    "  |"
 
 echo -n "| log10(x) |  "
-./rlibm_Ofa/Log10
+echo -n "                 "
 echo -n "  |  "
 ./glibc_double/Log10
 echo -n "  |  "
@@ -28,7 +28,7 @@ echo -n "  |  "
 echo    "  |"
 
 echo -n "| exp(x)   |  "
-./rlibm_Ofa/Exp
+echo -n "                 "
 echo -n "  |  "
 ./glibc_double/Exp
 echo -n "  |  "
@@ -36,7 +36,7 @@ echo -n "  |  "
 echo    "  |"
 
 echo -n "| exp2(x)  |  "
-./rlibm_Ofa/Exp2
+echo -n "                 "
 echo -n "  |  "
 ./glibc_double/Exp2
 echo -n "  |  "
@@ -44,7 +44,7 @@ echo -n "  |  "
 echo    "  |"
 
 echo -n "| exp10(x) |  "
-./rlibm_Ofa/Exp10
+echo -n "                 "
 echo -n "  |  "
 ./glibc_double/Exp10
 echo -n "  |  "
@@ -52,7 +52,7 @@ echo -n "  |  "
 echo    "  |"
 
 echo -n "| sinh(x)  |  "
-./rlibm_Ofa/Sinh
+echo -n "                 "
 echo -n "  |  "
 ./glibc_double/Sinh
 echo -n "  |  "
@@ -60,7 +60,7 @@ echo -n "  |  "
 echo    "  |"
 
 echo -n "| cosh(x)  |  "
-./rlibm_Ofa/Cosh
+echo -n "                 "
 echo -n "  |  "
 ./glibc_double/Cosh
 echo -n "  |  "
@@ -68,7 +68,7 @@ echo -n "  |  "
 echo    "  |"
 
 echo -n "| sinpi(x) |  "
-./rlibm_Ofa/Sinpi
+echo -n "                 "
 echo -n "  |  "
 echo -n "                 "
 echo -n "  |  "
@@ -76,7 +76,7 @@ echo -n "  |  "
 echo    "  |"
 
 echo -n "| cospi(x) |  "
-./rlibm_Ofa/Cospi
+echo -n "                 "
 echo -n "  |  "
 echo -n "                 "
 echo -n "  |  "

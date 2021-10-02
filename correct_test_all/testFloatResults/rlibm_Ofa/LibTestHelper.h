@@ -51,7 +51,7 @@ void RunTestForExponent() {
   
   floatX fx;
   
-  for (unsigned long count = 0x0; count < 0x100000000; count += 0x100) {
+  for (unsigned long count = 0x0; count < 0x100000000; count += 1) {
     fx.x = count;
     double res = __ELEM__(fx.f);
     
