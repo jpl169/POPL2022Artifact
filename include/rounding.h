@@ -336,6 +336,7 @@ float RoundDoubleToFEN(double v, int explength, int bitlength, enum RoundMode rn
     printf("explen = %d\n", explength);
     printf("bitlen = %d\n", bitlength);
     printf("vminus = %x\n", vminus);
+    printf("sign = %d\n", sign)
   }
   
   // 4, 2
