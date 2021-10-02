@@ -28,7 +28,7 @@ make -s
 cd ../intel_rlibm32
 make -s clean
 make -s
-cd ../../..
+cd ../..
 
 echo -e "\033[1mRunning Performance Test Suite \033[0m"
 cd overhead_test/glibc_rlibm_generic
@@ -98,4 +98,4 @@ cd ../intel_rlibm_generic
 make -s clean
 cd ../intel_rlibm32
 make -s clean
-cd ../../..
+cd ../..
