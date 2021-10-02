@@ -1,6 +1,6 @@
 CC = gcc
 
-funcNames = Log Log2 Log10 Exp Exp10 Exp2 Sinh Cosh Exp10Separate Log10Separate
+funcNames = Log Log2 Log10 Exp Exp10 Exp2 Sinh Cosh
 
 src = $(patsubst %, %.c, $(funcNames))
 obj = $(patsubst %, %, $(funcNames))
