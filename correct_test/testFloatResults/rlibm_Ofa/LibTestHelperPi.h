@@ -53,7 +53,20 @@ void RunTestForExponent() {
       float roundedRes = RoundDoubleToF8N(res, 32, rmode);
       
       if (oracleRes != oracleRes && roundedRes != roundedRes) continue;
-      if (oracleRes != roundedRes) wrongCounts[rnd_index]++;
+      if (oracleRes != roundedRes) {
+        wrongCounts[rnd_index]++;
+        
+        if (wrongCounts[rnd_index] <= 5) {
+          printf("count  = %lu\n", count);
+          printf("rnd    = %s\n", rnd_modes_string[rnd_index]);
+          printf("x      = %.50e\n", fx.f);
+          printf("oracle = %.50e\n", oracleResult);
+          printf("res    = %.100e\n", res);
+          printf("res    = %lx\n", *(unsigned long*)&res);
+          printf("test   = %.50e\n\n", roundedRes);
+          printf("res    = %x\n", *(unsigned*)&roundedRes);
+        }
+      }
     }
   }
   
