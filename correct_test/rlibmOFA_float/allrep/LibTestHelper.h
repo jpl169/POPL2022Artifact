@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include "math.h"
 #include "mpfr.h"
+#include "rounding.h"
 
 mpfr_t mval, mval200;
 int default_emin, default_emax, new_emin, new_emax;
