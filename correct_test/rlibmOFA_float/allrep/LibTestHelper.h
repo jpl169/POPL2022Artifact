@@ -135,7 +135,7 @@ unsigned long RunTestForExponent(int numExpBit) {
       
       for (int rnd_index = 0; rnd_index < 5; rnd_index++) {
         float oracleResult = MpfrResult(x, numExpBit, bitlen, rnd_modes[rnd_index]);
-        float roundedRes = RoundDoubleToFEN(res, numExpBit, bitlen,
+        unsigned roundedRes = RoundDoubleToFEN(res, numExpBit, bitlen,
                                              my_rnd_modes[rnd_index], 0);
 	
         if (oracleResult != oracleResult && roundedRes != roundedRes) continue;
