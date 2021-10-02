@@ -334,6 +334,7 @@ float RoundDoubleToFEN(double v, int explength, int bitlength, enum RoundMode rn
   
   
   if (*(unsigned long*)&v == 0x3746a5bea046b42e) {
+    printf("roundDecision = %d\n", roundDecision);
     printf("explen = %d\n", explength);
     printf("bitlen = %d\n", bitlength);
     printf("vminus = %x\n", vminus);
