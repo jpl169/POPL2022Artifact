@@ -57,6 +57,7 @@ unsigned long RunTestForExponent(int numExpBit) {
     for (unsigned long count = 0x0; count < upperlimit; count += step) {
       float x = ConvertBinToFP((unsigned)count, numExpBit, bitlen);
       double res = __ELEM__(x);
+      int sticky;
       double orc = MpfrResult(x, &sticky);
       
       for (int rnd_index = 0; rnd_index < 5; rnd_index++) {
