@@ -192,7 +192,7 @@ float RoundDoubleToF8NWithSticky(double v,
 
 // explength = 8
 // We assume the double value v is a normal value in double.
-unsigned RoundDoubleToFEN(double v, int explength, int bitlength, enum RoundMode rnd, int sticky) {
+float RoundDoubleToFEN(double v, int explength, int bitlength, enum RoundMode rnd, int sticky) {
   unsigned numMantissa = bitlength - (8 + 1);
   
   doubleint temp;
@@ -272,7 +272,9 @@ unsigned RoundDoubleToFEN(double v, int explength, int bitlength, enum RoundMode
   }
   
   vminus += roundDecision;
-  unsigned res = vminus;
-  vminus |= sign << ((unsigned)bitlength - 1);
-  return vminus;
+  unsigned res;
+  res = vminus;
+  if (bitlength < 32) res.x <<= 32 - bitlength;
+  res |= (sign);
+  return res.f;
 }
