@@ -2,37 +2,38 @@
 #include <stdio.h>
 #include "float34RO_math.h"
 #include <stdlib.h>
-#include <sys/stat.h>
-#include <sys/mman.h>
-#include <errno.h>
 #include <fcntl.h>
 #include <string.h>
 #include <unistd.h>
 #include "math.h"
 #include "mpfr.h"
 
-mpfr_t mval;
-unsigned long totalWrongCount = 0;
+mpfr_t mval, mval200;
+int default_emin, default_emax, new_emin, new_emax;
 
-mpfr_rnd_t rnd_modes[5] = {MPFR_RNDN, MPFR_RNDD, MPFR_RNDU, MPFR_RNDZ, MPFR_RNDA};
+mpfr_rnd_t rnd_modes[5] = {MPFR_RNDN, MPFR_RNDD, MPFR_RNDU, MPFR_RNDZ, MPFR_RNDNA};
 
-double tensorfloat19exp(float x, mpfr_rnd_t rnd) {
-
+float MpfrResult(float x, mpfr_rnd_t rnd) {
+  if (rnd == MPFR_RNDNA) {
+    unsigned sticky = 0;
+    mpfr_set_emin(default_emin);
+    mpfr_set_emax(default_emax);
+    int exact = mpfr_set_d(mval200, x, MPFR_RNDZ);
+    exact = __MPFR_ELEM__(mval200, mval200, MPFR_RNDZ);
+    if (exact != 0) sticky = 1;
+    double result = mpfr_get_d(mval200, MPFR_RNDZ);
+    if (mpfr_cmp_d(mval200, result) != 0) sticky = 1;
+    return RoundDoubleToF8N(result, numExpBit, bitlen, RNA, sticky);
+  }
+  
+  mpfr_set_emin(new_emin);
+  mpfr_set_emax(new_emax);
   int exact = mpfr_set_d(mval, x, MPFR_RNDZ);
-  if (exact != 0) {
-    printf("uh oh... this value isn't exactly representable\n");
-    printf("x = %.100e\n", x);
-  }
   exact = mpfr_subnormalize(mval, exact, MPFR_RNDZ);
-  if (exact != 0) {
-    printf("uh oh... something going on with subnormal\n");
-    printf("x = %.100e\n", x);
-  }
 
   exact = __MPFR_ELEM__(mval, mval, rnd);
-  exact = mpfr_check_range(mval, exact, rnd);
   exact = mpfr_subnormalize(mval, exact, rnd);
-  double result = mpfr_get_d(mval, rnd);
+  float result = mpfr_get_flt(mval, rnd);
 
   return result;
 }
@@ -107,93 +108,47 @@ float ConvertBinaryToFP(unsigned binary, int numExpBit, unsigned bitlen) {
   return fX.f;
 }
 
-// 19bits
-// 1 sign bit, 8 exponent bits, 10 mantissa bits
-// 11 precision bits
-// bias = 2^{7} - 1 = 127
-// 2^{8} - 1 - 127 = 255 - 127 = 128
-// emax = 128
-// 1 - bias = 1 - 127 = -126
-// smallest value: 2^(-126 - 10) = 2^(-136) = 1/2 * 2^emin
-// emin = -135
-
-
-// double
-// 1 sign bit, 11 exponent bits, 52 mantissa bits
-// 53 precision bits
-// bias = 2^{10} - 1 = 1023
-// 2^{11} - 1 - 1023 = 2047 - 1023 = 1024
-// emax = 1024
-// 1 - bias = 1 - 1023 = -1022
-// smallest value: 2^(-1022 - 52) = 2^(-1074) = 1/2 * 2^emin
-// emin = -1073
-
-unsigned long RunTestForExponent(int numExpBit, FILE* lfd) {
+unsigned long RunTestForExponent(int numExpBit) {
   unsigned long wrongResult = 0;
 
-  fprintf(lfd, "Checking for numExpBit = %d\n", numExpBit);
-  fprintf(lfd, "bitlength from %u to %u\n", numExpBit + 2, numExpBit + 24);
-  fflush(lfd);
   for (unsigned bitlen = numExpBit + 2; bitlen <= numExpBit + 24; bitlen++) {
     int bias = (1 << (numExpBit - 1)) - 1;
     int emax = (1 << numExpBit) - 1 - bias;
-        
-    mpfr_set_default_prec(bitlen - numExpBit);
-    mpfr_set_emin(1 - bias - ((int)bitlen - 1 - numExpBit) + 1);
-    mpfr_set_emax(emax);
-    mpfr_init(mval);
     
-    // 1000 0000 0000 0000 0000                                                                      
+    default_emin = mpfr_get_emin();
+    default_emax = mpfr_get_emax();
+    new_emin = 1 - bias - ((int)bitlen - 1 - numExpBit) + 1;
+    new_emax = emax;
+    
+    mpfr_init2(mval, bitlen - numExpBit);
+    
     unsigned long upperlimit = 1lu << (unsigned long)bitlen;
-    for (unsigned long count = 0x0; count < upperlimit; count++) {
+    // Run at most 64K at a time. That's still 5 * 22 * 7 * 64K = 50M tests
+    unsigned step = (1u << (16u - bitlen));
+    for (unsigned long count = 0x0; count < upperlimit; count += step) {
       float x = ConvertBinaryToFP((unsigned)count, numExpBit, bitlen);
       double res = __ELEM__(x);
       
       for (int rnd_index = 0; rnd_index < 5; rnd_index++) {
-        mpfr_rnd_t rnd = rnd_modes[rnd_index];
-        double oracleResult = tensorfloat19exp(x, rnd);
-        double roundedRes = roundToTensorfloat19(res, rnd);
+        double oracleResult = MpfrResult(x, rnd_modes[rnd_index]);
+        double roundedRes = RoundDoubleToF8N(res, numExpBit, bitlen,
+                                             my_rnd_modes[rnd_index], 0);
 	
-	if (oracleResult != oracleResult && roundedRes != roundedRes) continue;
-	if (oracleResult != roundedRes && wrongResult < 10) {
-          wrongResult++;
-          fprintf(lfd, "x       = %.70e\n", x);
-          fprintf(lfd, "bitlength = %u\n", bitlen);
-          fprintf(lfd, "rounding mode index = %i\n", rnd_index);
-          fprintf(lfd, "rlibm   = %.70e (%lx)\n", res, *(unsigned long*)&res);
-          fprintf(lfd, "rounded = %.70e (%lx)\n", roundedRes, *(unsigned long*)&roundedRes);
-          fprintf(lfd, "oracle  = %.70e (%lx)\n", oracleResult, *(unsigned long*)&oracleResult);
-          fprintf(lfd, "\n");
-	  fflush(lfd);
+        if (oracleResult != oracleResult && roundedRes != roundedRes) continue;
+        if (oracleResult != roundedRes && wrongResult < 10) {
+            wrongResult++;
         }
       }
-      
-      
-      if (count % 1000000 == 0) {
-        printf("numExpBit: %1.d, bitlen: %2.u, count = %12.lu (wrong results: %lu/%lu)\r", numExpBit, bitlen, count, wrongResult, totalWrongCount);
-        fflush(stdout);
-      }
-      
     }
     
     mpfr_clear(mval);
   }
 
-  fprintf(lfd, "\nNumber Of Wrong Result for Expbit %d: %lu\n\n", numExpBit, wrongResult);
-  printf("\nNumber Of Wrong Result for Expbit %d: %lu\n\n", numExpBit, wrongResult);
-  fflush(lfd);
   return wrongResult;
 }
 
 void RunTest(char* logFile) {
-
-  FILE* lfd = fopen(logFile, "w");
-  // Exp bit for 8 has already been checked
-  for (int i = 2; i < 8; i++) {
-    totalWrongCount += RunTestForExponent(i, lfd);
+  for (int i = 2; i <= 8; i++) {
+    RunTestForExponent(i);
   }
-
-  printf("Total wrong count: %lu\n", totalWrongCount);
-
-  fclose(lfd);
 }
