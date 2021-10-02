@@ -3,19 +3,19 @@
 echo -e "\033[1mBuilding Performance Test Suite \033[0m"
 cd overhead_test/crlibm
 make -s clean
-make -s -f Makefile_gcc10
+make -s -f Makefile
 cd ../glibc_double
 make -s clean
-make -s -f Makefile_gcc10
+make -s -f Makefile
 cd ../glibc_float
 make -s clean
-make -s -f Makefile_gcc10
+make -s -f Makefile
 cd ../glibc_rlibm_generic
 make -s clean
-make -s -f Makefile_gcc10
+make -s -f Makefile
 cd ../glibc_rlibm32
 make -s clean
-make -s -f Makefile_gcc10
+make -s -f Makefile
 cd ../intel_double
 make -s clean
 make -s
