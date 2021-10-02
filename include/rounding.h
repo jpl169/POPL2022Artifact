@@ -190,7 +190,7 @@ float RoundDoubleToF8NWithSticky(double v,
   return res.f;
 }
 
-float ConvertBinaryToFP(unsigned binary, int numExpBit, unsigned bitlen) {
+float ConvertBinToFP(unsigned binary, int numExpBit, unsigned bitlen) {
   unsigned numMantissa = bitlen - numExpBit - 1;
   int bias = (1 << (numExpBit - 1)) - 1;
   
@@ -336,5 +336,5 @@ float RoundDoubleToFEN(double v, int explength, int bitlength, enum RoundMode rn
   
   vminus += roundDecision;
   vminus |= sign << (bitlength - 1);
-  return ConvertBinaryToFP(vminus, explength, bitlength);
+  return ConvertBinToFP(vminus, explength, bitlength);
 }
