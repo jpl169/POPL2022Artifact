@@ -1,9 +1,6 @@
 #define _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
-#include <sys/stat.h>
-#include <sys/mman.h>
-#include <errno.h>
 #include <fcntl.h>
 #include <string.h>
 #include <unistd.h>
@@ -37,15 +34,13 @@ void RunTestForExponent(FILE* lfd) {
   }
   
   for (int i = 0; i < 5; i++) {
-    fprintf(lfd, "Number of Wrong Results for %s rounding mode: %lu\n",
-            rnd_modes_string[i],
-            wrongCounts[i]);
+    if (wrongCounts[i] == 0) printf("\033[0;32mo\033[0m");
+    else printf("\033[0;31mx\033[0m");
+    if (i < 4) printf("   ");
   }
+  
 }
 
 void RunTest(char* logFile) {
-
-  FILE* lfd = fopen(logFile, "w");
-  RunTestForExponent(lfd);
-  fclose(lfd);
+  RunTestForExponent();
 }

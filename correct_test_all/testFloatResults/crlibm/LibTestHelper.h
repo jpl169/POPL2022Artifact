@@ -4,9 +4,6 @@
 #include "float34RO_math.h"
 #include "rounding.h"
 #include <stdlib.h>
-#include <sys/stat.h>
-#include <sys/mman.h>
-#include <errno.h>
 #include <fcntl.h>
 #include <string.h>
 #include <unistd.h>

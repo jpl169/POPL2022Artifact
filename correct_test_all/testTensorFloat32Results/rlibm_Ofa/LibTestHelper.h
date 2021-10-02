@@ -3,39 +3,38 @@
 #include "float34RO_math.h"
 #include "rounding.h"
 #include <stdlib.h>
-#include <sys/stat.h>
-#include <sys/mman.h>
-#include <errno.h>
 #include <fcntl.h>
 #include <string.h>
 #include <unistd.h>
 #include "math.h"
 #include "mpfr.h"
 
-mpfr_t mval;
+mpfr_t mval, mval200;
+int default_emin, default_emax;
 
-mpfr_rnd_t rnd_modes[5] = {MPFR_RNDN, MPFR_RNDD, MPFR_RNDU, MPFR_RNDZ, MPFR_RNDN};
+mpfr_rnd_t rnd_modes[5] = {MPFR_RNDN, MPFR_RNDD, MPFR_RNDU, MPFR_RNDZ, MPFR_RNDNA};
 char* rnd_modes_string[5] = {"RNE", "RNN", "RNP", "RNZ", "RNA"};
 enum RoundMode my_rnd_modes[5] = {RNE, RNN, RNP, RNZ, RNA};
 
-double MpfrResult(float x, mpfr_rnd_t rnd, FILE* lfd) {
-
+float MpfrResult(float x, mpfr_rnd_t rnd, FILE* lfd) {
+  if (rnd == MPFR_RNDNA) {
+    unsigned sticky = 0;
+    mpfr_set_emin(default_emin);
+    mpfr_set_emax(default_emax);
+    int exact = mpfr_set_d(mval200, x, MPFR_RNDZ);
+    exact = __MPFR_ELEM__(mval200, mval200, MPFR_RNDZ);
+    if (exact != 0) sticky = 1;
+    double result = mpfr_get_d(mval200, MPFR_RNDZ);
+    if (mpfr_cmp_d(mval200, result) != 0) sticky = 1;
+    return RoundDoubleToF8NWithSticky(result, 19, RNA, sticky);
+  }
+  
   int exact = mpfr_set_d(mval, x, MPFR_RNDZ);
-  if (exact != 0) {
-    fprintf(lfd, "uh oh... this value isn't exactly representable\n");
-    fprintf(lfd, "x = %.100e\n", x);
-  }
   exact = mpfr_subnormalize(mval, exact, MPFR_RNDZ);
-  if (exact != 0) {
-    fprintf(lfd, "uh oh... something going on with subnormal\n");
-    fprintf(lfd, "x = %.100e\n", x);
-  }
-
+  
   exact = __MPFR_ELEM__(mval, mval, rnd);
-  exact = mpfr_check_range(mval, exact, rnd);
   exact = mpfr_subnormalize(mval, exact, rnd);
   double result = mpfr_get_d(mval, rnd);
-
   return result;
 }
 
@@ -43,10 +42,8 @@ void RunTestForExponent(FILE* lfd) {
   unsigned long wrongCounts[5];
   for (int i = 0; i < 5; i++) wrongCounts[i] = 0;
       
-  mpfr_set_default_prec(11);
-  mpfr_set_emin(-135);
-  mpfr_set_emax(128);
-  mpfr_init(mval);
+  mpfr_init2(mval, 11);
+  mpfr_int2(mval200, 12);
   
   floatX fx;
   
@@ -74,18 +71,15 @@ void RunTestForExponent(FILE* lfd) {
   }
   
   for (int i = 0; i < 5; i++) {
-    fprintf(lfd, "Number of Wrong Results for %s rounding mode: %lu\n",
-            rnd_modes_string[i],
-            wrongCounts[i]);
+    if (wrongCounts[i] == 0) printf("\033[0;32mo\033[0m");
+    else printf("\033[0;31mx\033[0m");
+    if (i < 4) printf("   ");
   }
   
   mpfr_clear(mval);
-  
+  mpfr_clear(mval200);
 }
 
 void RunTest(char* logFile) {
-
-  FILE* lfd = fopen(logFile, "w");
-  RunTestForExponent(lfd);
-  fclose(lfd);
+  RunTestForExponent();
 }

@@ -1,16 +1,17 @@
 #!/bin/bash
-cd crlibm
+cd rlibm_Ofa
+make -s clean
 make -s
 cd ../glibc_double
-make -s
-cd ../glibc_float
+make -s clean
 make -s
 cd ../intel_double
+make -s clean
 make -s
-cd ../intel_float
-make -s
-cd ../rlibm_Ofa
+cd ../crlibm
+make -s clean
 make -s
 cd ../rlibm32
+make -s clean
 make -s
 cd ..

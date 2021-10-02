@@ -29,8 +29,6 @@ float MpfrResult(float x, mpfr_rnd_t rnd) {
     return RoundDoubleToF8NWithSticky(result, 32, RNA, sticky);
   }
   
-  mpfr_set_emin(-148);
-  mpfr_set_emax(128);
   int exact = mpfr_set_d(mval, x, MPFR_RNDZ);
   exact = mpfr_subnormalize(mval, exact, MPFR_RNDZ);
 
@@ -46,8 +44,6 @@ void RunTestForExponent() {
   
   mpfr_init2(mval, 24);
   mpfr_init2(mval200, 25);
-  default_emin = mpfr_get_emin();
-  default_emax = mpfr_get_emax();
   
   floatX fx;
   
@@ -85,6 +81,7 @@ void RunTestForExponent() {
   }
   
   mpfr_clear(mval);
+  mpfr_clear(mval200);
 }
 
 void RunTest(char* logFile) {
