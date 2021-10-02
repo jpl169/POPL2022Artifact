@@ -1,6 +1,7 @@
 #define _GNU_SOURCE
 #include <stdio.h>
 #include "float34RO_math.h"
+#include "rounding.h"
 #include <stdlib.h>
 #include <fcntl.h>
 #include <string.h>
