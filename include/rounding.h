@@ -332,6 +332,10 @@ float RoundDoubleToFEN(double v, int explength, int bitlength, enum RoundMode rn
       break;
   }
   
+  if (v == 6.9314718055994528622676398299518041312694549560546875e-01) {
+    printf("vminus = %x\n", vminus);
+  }
+  
   vminus += roundDecision;
   vminus |= sign << (bitlength - 1);
   return ConvertBinToFP(vminus, explength, bitlength);
