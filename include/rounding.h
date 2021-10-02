@@ -272,9 +272,9 @@ float RoundDoubleToFEN(double v, int explength, int bitlength, enum RoundMode rn
   }
   
   vminus += roundDecision;
-  unsigned res;
-  res = vminus;
+  floatint res;
+  res.x = vminus;
   if (bitlength < 32) res.x <<= 32 - bitlength;
-  res |= (sign);
+  res.x |= sign;
   return res.f;
 }
