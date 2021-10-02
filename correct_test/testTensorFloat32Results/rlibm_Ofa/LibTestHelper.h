@@ -60,12 +60,6 @@ void RunTestForExponent() {
       if (oracleResult != roundedRes) {
         wrongCounts[rnd_index]++;
         
-        if (wrongCounts[rnd_index] <= 5) {
-          fprintf(lfd, "count = %lu\n", count);
-          fprintf(lfd, "x      = %.50e\n", fx.f);
-          fprintf(lfd, "oracle = %.50e\n", oracleResult);
-          fprintf(lfd, "test   = %.50e\n\n", roundedRes);
-        }
       }
     }
   }
