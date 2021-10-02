@@ -87,11 +87,13 @@ unsigned long RunTestForExponent(int numExpBit) {
     
     if (wrongResult == 0) printf("Testing FP%u(%d exp bit): check    \r", bitlen, numExpBit);
     else                  printf("Testing FP%u(%d exp bit): incorrect\r", bitlen, numExpBit);
+    fflush(stdout);
     totalWrongResult += wrongResult;
   }
   
   if (totalWrongResult == 0) printf("FP reps with %d exp bits: check    \n", numExpBit);
   else                       printf("FP reps with %d exp bits: incorrect\n", numExpBit);
+  fflush(stdout);
   
   mpfr_clear(mval);
 
