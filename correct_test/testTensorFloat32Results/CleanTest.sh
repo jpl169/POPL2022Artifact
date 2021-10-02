@@ -1,12 +1,12 @@
 #!/bin/bash
 cd ../rlibm_Ofa
-make -clean
+make -s clean
 cd ../glibc_double
-make -clean
+make -s clean
 cd ../intel_double
-make -clean
+make -s clean
 cd crlibm
-make -clean
+make -s clean
 cd ../rlibm32
-make -clean
+make -s clean
 cd ..
