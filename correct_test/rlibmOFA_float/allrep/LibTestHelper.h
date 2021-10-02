@@ -45,6 +45,7 @@ unsigned long RunTestForExponent(int numExpBit) {
   unsigned long totalWrongResult = 0;
 
   for (unsigned bitlen = numExpBit + 2; bitlen <= numExpBit + 24; bitlen++) {
+    unsigned long wrongResult = 0;
     int bias = (1 << (numExpBit - 1)) - 1;
     int emax = (1 << numExpBit) - 1 - bias;
     
@@ -61,7 +62,6 @@ unsigned long RunTestForExponent(int numExpBit) {
     
     unsigned step = (bitlen > 16) ? (1u << (bitlen - 16u)) : 1u;
     for (unsigned long count = 0x0; count < upperlimit; count += step) {
-      unsigned long wrongResult = 0;
       float x = ConvertBinToFP((unsigned)count, numExpBit, bitlen);
       double res = __ELEM__(x);
       
@@ -88,12 +88,22 @@ unsigned long RunTestForExponent(int numExpBit) {
       }
     }
     
+    if (wrongResult == 0)
+      printf("Testing FP%u(%d exp bit): \033[0;32mcheck\033[0m    \r", bitlen, numExpBit);
+    else
+      printf("Testing FP%u(%d exp bit): \033[0;31mincorrect\033[0m\r", bitlen, numExpBit);
+    fflush(stdout);
+    totalWrongResult += wrongResult;
+    
     mpfr_clear(mval);
     mpfr_clear(mval200);
   }
   
-  if (wrongResult == 0) printf("check\n");
-  else printf("uh oh\n");
+  if (totalWrongResult == 0)
+    printf("FP reps with %d exp bits: \033[0;32mcheck\033[0m    \n", numExpBit);
+  else
+    printf("FP reps with %d exp bits: incorrect\n", numExpBit);
+  fflush(stdout);
 
   return wrongResult;
 }

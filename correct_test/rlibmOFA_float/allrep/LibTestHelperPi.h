@@ -39,6 +39,7 @@ unsigned long RunTestForExponent(int numExpBit) {
   unsigned long totalWrongResult = 0;
 
   for (unsigned bitlen = numExpBit + 2; bitlen <= numExpBit + 24; bitlen++) {
+    unsigned long wrongResult = 0;
     int bias = (1 << (numExpBit - 1)) - 1;
     int emax = (1 << numExpBit) - 1 - bias;
     
@@ -53,7 +54,6 @@ unsigned long RunTestForExponent(int numExpBit) {
       double orc = MpfrResult(x, &sticky);
       
       for (int rnd_index = 0; rnd_index < 5; rnd_index++) {
-        unsigned long wrongResult = 0;
         float oracleResult = RoundDoubleToFEN(orc, numExpBit, bitlen, my_rnd_modes[rnd_index], sticky);
         float roundedRes = RoundDoubleToFEN(res, numExpBit, bitlen,
                                              my_rnd_modes[rnd_index], 0);
