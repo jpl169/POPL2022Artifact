@@ -332,7 +332,7 @@ float RoundDoubleToFEN(double v, int explength, int bitlength, enum RoundMode rn
       break;
   }
   
-  if (v == 6.9314718055994528622676398299518041312694549560546875e-01) {
+  if (v == -6.9314718055994528622676398299518041312694549560546875e-01) {
     printf("explen = %d\n", explength);
     printf("bitlen = %d\n", bitlength);
     printf("vminus = %x\n", vminus);
@@ -343,7 +343,7 @@ float RoundDoubleToFEN(double v, int explength, int bitlength, enum RoundMode rn
   // exp = 2. bias = 2^(2 - 1) - 1 = 1
   // smallest exp = 1 - bias = 0
   // denormal
-  // 
+  //
   
   vminus += roundDecision;
   vminus |= sign << (bitlength - 1);
