@@ -13,6 +13,8 @@ mpfr_t mval, mval200;
 int default_emin, default_emax, new_emin, new_emax;
 
 mpfr_rnd_t rnd_modes[5] = {MPFR_RNDN, MPFR_RNDD, MPFR_RNDU, MPFR_RNDZ, MPFR_RNDNA};
+char* rnd_modes_string[5] = {"RNE", "RNN", "RNP", "RNZ", "RNA"};
+enum RoundMode my_rnd_modes[5] = {RNE, RNN, RNP, RNZ, RNA};
 
 float MpfrResult(float x, int numExpBit, unsigned bitlen, mpfr_rnd_t rnd) {
   if (rnd == MPFR_RNDNA) {
