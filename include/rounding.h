@@ -212,14 +212,16 @@ float ConvertBinToFP(unsigned binary, int numExpBit, unsigned bitlen) {
     return 0.0 / 0.0;
   }
   
+  if (numExpBit == 8) {
+    // Then just need to shift left/right
+    floatX fX;
+    fX.x = binary << (32 - bitlen);
+    return fX.f;
+  }
+  
   // Take care of denormal value
   if (expBits == 0) {
-    
-    if (binary == 1 && numExpBit == 8 && bitlen == 10) {
-      printf("signBit = %d\n", signBit);
-      printf("mantissa = %x\n", mantissa);
-      printf("expBits = %x\n", expBits);
-    }
+    // Guaranteed to be normal value in FP32
     
     int expVal = 1 - bias;
     
@@ -236,12 +238,6 @@ float ConvertBinToFP(unsigned binary, int numExpBit, unsigned bitlen) {
     expVal -= 1 + numZeroInMantissa;
     mantissa <<= (24 - first1Pos);
     mantissa &= 0x7FFFFF;
-    
-    
-    if (binary == 1 && numExpBit == 8 && bitlen == 10) {
-      printf("expVal = %d\n", expVal);
-      printf("mantissa = %x\n", mantissa);
-    }
     
     floatX fX;
     fX.x = (signBit == 0) ? 0x0 : 0x80000000;
