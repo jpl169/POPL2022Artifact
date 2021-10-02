@@ -43,7 +43,7 @@ void RunTestForExponent(FILE* lfd) {
   for (int i = 0; i < 5; i++) wrongCounts[i] = 0;
       
   mpfr_init2(mval, 11);
-  mpfr_int2(mval200, 12);
+  mpfr_init2(mval200, 12);
   
   floatX fx;
   
