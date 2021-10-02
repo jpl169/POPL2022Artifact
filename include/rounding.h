@@ -338,6 +338,13 @@ float RoundDoubleToFEN(double v, int explength, int bitlength, enum RoundMode rn
     printf("vminus = %x\n", vminus);
   }
   
+  // 9, 2
+  // 0.6875 = 0.1011 = 1.011 * 2^-1
+  // exp = 2. bias = 2^(2 - 1) - 1 = 1
+  // smallest exp = 1 - bias = 0
+  // denormal
+  // 
+  
   vminus += roundDecision;
   vminus |= sign << (bitlength - 1);
   return ConvertBinToFP(vminus, explength, bitlength);
