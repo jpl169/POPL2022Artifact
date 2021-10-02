@@ -9,6 +9,8 @@
 #include "mpfr.h"
 #include "rounding.h"
 
+#define MAX_STRIDE 17u
+
 mpfr_t mval;
 int IsSpecialCase(float, double*);
 
@@ -43,10 +45,11 @@ unsigned long RunTestForExponent(int numExpBit) {
     int bias = (1 << (numExpBit - 1)) - 1;
     int emax = (1 << numExpBit) - 1 - bias;
     
-    unsigned long upperlimit = 1lu << (unsigned long)bitlen;
     // Run at most 64K at a time. That's still 5 * 22 * 7 * 64K = 50M tests
-    
-    unsigned step = (bitlen > 17) ? (1u << (bitlen - 17u)) : 1u;
+    unsigned long upperlimit = 1lu << (unsigned long)bitlen;
+    unsigned long start = bitlen <= MAX_STRIDE ?
+                          0 : 1lu << (bitlen - MAX_STRIDE - 1);
+    unsigned step = (bitlen > MAX_STRIDE) ? (1u << (bitlen - MAX_STRIDE)) : 1u;
     for (unsigned long count = 0x0; count < upperlimit; count += step) {
       float x = ConvertBinToFP((unsigned)count, numExpBit, bitlen);
       double res = __ELEM__(x);
