@@ -46,7 +46,7 @@ unsigned long RunTestForExponent(int numExpBit) {
     unsigned long upperlimit = 1lu << (unsigned long)bitlen;
     // Run at most 64K at a time. That's still 5 * 22 * 7 * 64K = 50M tests
     
-    unsigned step = (bitlen > 16) ? (1u << (bitlen - 16u)) : 1u;
+    unsigned step = (bitlen > 17) ? (1u << (bitlen - 17u)) : 1u;
     for (unsigned long count = 0x0; count < upperlimit; count += step) {
       float x = ConvertBinToFP((unsigned)count, numExpBit, bitlen);
       double res = __ELEM__(x);
