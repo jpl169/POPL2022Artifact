@@ -190,9 +190,71 @@ float RoundDoubleToF8NWithSticky(double v,
   return res.f;
 }
 
+float ConvertBinaryToFP(unsigned binary, int numExpBit, unsigned bitlen) {
+  unsigned numMantissa = bitlen - numExpBit - 1;
+  int bias = (1 << (numExpBit - 1)) - 1;
+  
+  unsigned signBit = binary & (1 << (bitlen - 1));
+  unsigned mantissa = binary & ((1 << numMantissa) - 1);
+  unsigned expBits = binary - signBit - mantissa;
+  expBits >>= numMantissa;
+  
+  // First check for special cases:
+  // zero:
+  if (binary == 0 || binary == (1 << (bitlen - 1))) return 0.0;
+  // infinity and nan:
+  if (expBits == (1 << (unsigned)numExpBit) - 1) {
+    if (mantissa == 0) {
+      if (signBit == 0) return 1.0 / 0.0;
+      else return -1.0 / 0.0;
+    }
+    
+    return 0.0 / 0.0;
+  }
+  
+  // Take care of denormal value
+  if (expBits == 0) {
+    int expVal = 1 - bias;
+    
+    // Get position of the first 1 from the left:
+    unsigned mantissaCopy = mantissa;
+    mantissaCopy |= mantissaCopy >> 16;
+    mantissaCopy |= mantissaCopy >> 8;
+    mantissaCopy |= mantissaCopy >> 4;
+    mantissaCopy |= mantissaCopy >> 2;
+    mantissaCopy |= mantissaCopy >> 1;
+    int first1Pos = __builtin_popcount(mantissaCopy);
+    unsigned numZeroInMantissa = numMantissa - first1Pos;
+    
+    expVal -= 1 + numZeroInMantissa;
+    mantissa <<= (24 - first1Pos);
+    mantissa &= 0x7FFFFF;
+    
+    floatX fX;
+    fX.x = (signBit == 0) ? 0x0 : 0x80000000;
+    fX.x |= mantissa;
+    expVal += 127;
+    unsigned floatExpBit = (unsigned)expVal << 23u;
+    fX.x |= floatExpBit;
+    return fX.f;
+  }
+  
+  int expVal = (int)expBits - bias;
+  expVal += 127;
+  unsigned floatExpBit = (unsigned)expVal << 23u;
+  mantissa <<= (23 - numMantissa);
+  
+  
+  floatX fX;
+  fX.x = (signBit == 0) ? 0x0 : 0x80000000;
+  fX.x |= mantissa;
+  fX.x |= floatExpBit;
+  return fX.f;
+}
+
 // explength = 8
 // We assume the double value v is a normal value in double.
-unsigned RoundDoubleToFEN(double v, int explength, int bitlength, enum RoundMode rnd, int sticky) {
+float RoundDoubleToFEN(double v, int explength, int bitlength, enum RoundMode rnd, int sticky) {
   unsigned numMantissa = bitlength - (8 + 1);
   
   doubleint temp;
@@ -274,5 +336,5 @@ unsigned RoundDoubleToFEN(double v, int explength, int bitlength, enum RoundMode
   
   vminus += roundDecision;
   vminus |= sign << (bitlength - 1);
-  return vminus;
+  return ConvertBinaryToFP(vminus, numExpBit, bitlength);
 }
