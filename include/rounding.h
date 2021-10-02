@@ -265,7 +265,7 @@ float RoundDoubleToFEN(double v, int explength, int bitlength, enum RoundMode rn
   // Take care of zero
   if ((temp.x & 0x7FFFFFFFFFFFFFFF) == 0) return v;
   
-  unsigned sign = (temp.x >= 0x8000000000000000) ? 0x80000000 : 0x0;
+  unsigned sign = (temp.x >= 0x8000000000000000) ? (0x1 << (bitlength - 1)) : 0x0;
   temp.x &= 0x7FFFFFFFFFFFFFFF;
   
   // Otherwise it's a number that rounds to a real value.
@@ -347,6 +347,6 @@ float RoundDoubleToFEN(double v, int explength, int bitlength, enum RoundMode rn
   //
   
   vminus += roundDecision;
-  vminus |= sign << (bitlength - 1);
+  vminus |= sign;
   return ConvertBinToFP(vminus, explength, bitlength);
 }
