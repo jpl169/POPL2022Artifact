@@ -214,6 +214,13 @@ float ConvertBinToFP(unsigned binary, int numExpBit, unsigned bitlen) {
   
   // Take care of denormal value
   if (expBits == 0) {
+    
+    if (binary == 1 && numExpBit == 8 && bitlen == 10) {
+      printf("signBit = %d\n", signBit);
+      printf("mantissa = %x\n", mantissa);
+      printf("expBits = %x\n", expBits);
+    }
+    
     int expVal = 1 - bias;
     
     // Get position of the first 1 from the left:
@@ -331,7 +338,7 @@ float RoundDoubleToFEN(double v, int explength, int bitlength, enum RoundMode rn
       break;
   }
   
-  
+  /*
   if (*(unsigned long*)&v == 0x3746a5bea046b42e) {
     printf("v = %.50e\n", v);
     printf("rnd = %d\n", rnd);
@@ -342,7 +349,7 @@ float RoundDoubleToFEN(double v, int explength, int bitlength, enum RoundMode rn
     printf("bitlen = %d\n", bitlength);
     printf("vminus = %x\n", vminus);
     printf("sign = %d\n", sign);
-  }
+  }*/
   
   
   // 4, 2
@@ -353,19 +360,25 @@ float RoundDoubleToFEN(double v, int explength, int bitlength, enum RoundMode rn
   //
   
   vminus += roundDecision;
+  /*
   if (*(unsigned long*)&v == 0x3746a5bea046b42e) {
     printf("new vminus = %x\n", vminus);
   }
+   */
   vminus |= sign;
+  /*
   if (*(unsigned long*)&v == 0x3746a5bea046b42e) {
     printf("new new vminus = %x\n", vminus);
   }
+   */
   
   float res = ConvertBinToFP(vminus, explength, bitlength);
   
+  /*
   if (*(unsigned long*)&v == 0x3746a5bea046b42e) {
     printf("new new res = %.50e\n", res);
   }
+   */
   
   return res;
 }
