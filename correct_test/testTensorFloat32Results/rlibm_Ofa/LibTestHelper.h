@@ -16,7 +16,7 @@ mpfr_rnd_t rnd_modes[5] = {MPFR_RNDN, MPFR_RNDD, MPFR_RNDU, MPFR_RNDZ, MPFR_RNDN
 char* rnd_modes_string[5] = {"RNE", "RNN", "RNP", "RNZ", "RNA"};
 enum RoundMode my_rnd_modes[5] = {RNE, RNN, RNP, RNZ, RNA};
 
-double MpfrResult(float x, mpfr_rnd_t rnd, FILE* lfd) {
+double MpfrResult(float x, mpfr_rnd_t rnd) {
   if (rnd == MPFR_RNDNA) {
     unsigned sticky = 0;
     mpfr_set_emin(default_emin);
