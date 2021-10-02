@@ -37,6 +37,10 @@ double MpfrResult(float x, mpfr_rnd_t rnd) {
   exact = __MPFR_ELEM__(mval, mval, rnd);
   exact = mpfr_subnormalize(mval, exact, rnd);
   double result = mpfr_get_d(mval, rnd);
+  
+  mpfr_set_emin(default_emin);
+  mpfr_set_emax(default_emax);
+  
   return result;
 }
 
