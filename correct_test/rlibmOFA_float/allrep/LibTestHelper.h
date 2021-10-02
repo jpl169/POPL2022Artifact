@@ -14,7 +14,7 @@ int default_emin, default_emax, new_emin, new_emax;
 
 mpfr_rnd_t rnd_modes[5] = {MPFR_RNDN, MPFR_RNDD, MPFR_RNDU, MPFR_RNDZ, MPFR_RNDNA};
 
-float MpfrResult(float x, mpfr_rnd_t rnd) {
+float MpfrResult(float x, int numExpBit, unsigned bitlen, mpfr_rnd_t rnd) {
   if (rnd == MPFR_RNDNA) {
     unsigned sticky = 0;
     mpfr_set_emin(default_emin);
@@ -131,7 +131,7 @@ unsigned long RunTestForExponent(int numExpBit) {
       double res = __ELEM__(x);
       
       for (int rnd_index = 0; rnd_index < 5; rnd_index++) {
-        double oracleResult = MpfrResult(x, rnd_modes[rnd_index]);
+        double oracleResult = MpfrResult(x, numExpBit, bitlen, rnd_modes[rnd_index]);
         double roundedRes = RoundDoubleToF8N(res, numExpBit, bitlen,
                                              my_rnd_modes[rnd_index], 0);
 	
