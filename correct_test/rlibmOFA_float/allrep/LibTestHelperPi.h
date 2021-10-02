@@ -61,7 +61,7 @@ unsigned long RunTestForExponent(int numExpBit) {
       double orc = MpfrResult(x, &sticky);
       
       for (int rnd_index = 0; rnd_index < 5; rnd_index++) {
-        float oracleResult = RoundDoubleToF8NWithSticky(orc, 32, my_rnd_modes[rnd_index], sticky);
+        float oracleResult = RoundDoubleToFEN(orc, numExpBit, bitlen, my_rnd_modes[rnd_index], sticky);
         float roundedRes = RoundDoubleToFEN(res, numExpBit, bitlen,
                                              my_rnd_modes[rnd_index], 0);
 	
