@@ -45,6 +45,7 @@ double roundToTensorfloat19(double d, mpfr_rnd_t rnd) {
 unsigned long RunTestForExponent(int numExpBit) {
   unsigned long wrongResult = 0;
   mpfr_init2(mval, 500);
+  unsigned long totalWrongResult = 0;
 
   for (unsigned bitlen = numExpBit + 2; bitlen <= numExpBit + 24; bitlen++) {
     int bias = (1 << (numExpBit - 1)) - 1;
@@ -83,10 +84,14 @@ unsigned long RunTestForExponent(int numExpBit) {
         }
       }
     }
+    
+    if (wrongResult == 0) printf("Testing FP%u(%u exp bit): check    \r", );
+    else                  printf("Testing FP%u(%u exp bit): incorrect\r");
+    totalWrongResult += wrongResult
   }
   
-  if (wrongResult == 0) printf("check\n");
-  else printf("uh oh\n");
+  if (totalWrongResult == 0) printf("FP rep with %u exp bits: check     \n");
+  else                    printf("FP rep with %u exp bits: incorrect \n");
   
   mpfr_clear(mval);
 
@@ -94,7 +99,7 @@ unsigned long RunTestForExponent(int numExpBit) {
 }
 
 void RunTest(char* logFile) {
-  for (int i = 2; i <= 8; i++) {
+  for (int i = 8; i <= 8; i++) {
     RunTestForExponent(i);
   }
 }
