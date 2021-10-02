@@ -334,6 +334,8 @@ float RoundDoubleToFEN(double v, int explength, int bitlength, enum RoundMode rn
   
   
   if (*(unsigned long*)&v == 0x3746a5bea046b42e) {
+    printf("roundBit = %d\n", roundBit);
+    printf("sticky = %d\n", sticky);
     printf("roundDecision = %d\n", roundDecision);
     printf("explen = %d\n", explength);
     printf("bitlen = %d\n", bitlength);
@@ -350,6 +352,9 @@ float RoundDoubleToFEN(double v, int explength, int bitlength, enum RoundMode rn
   //
   
   vminus += roundDecision;
+  if (*(unsigned long*)&v == 0x3746a5bea046b42e) {
+    printf("new vminus = %x\n", vminus);
+  }
   vminus |= sign;
   return ConvertBinToFP(vminus, explength, bitlength);
 }
