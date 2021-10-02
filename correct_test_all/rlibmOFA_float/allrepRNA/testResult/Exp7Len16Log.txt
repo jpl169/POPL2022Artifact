@@ -1,4 +1,0 @@
-Checking for numExpBit = 7
-numExpBit: 7, bitlen: 16, count =              (wrong results: 0/0)
-Number Of Wrong Result for Expbit 7: 0
-
