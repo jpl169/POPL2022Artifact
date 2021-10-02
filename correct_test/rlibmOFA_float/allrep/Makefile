@@ -1,9 +1,9 @@
 CC = gcc
 
 funcNames = Log Log2 Log10 Exp Exp10 Exp2 Sinh Cosh
+funcPiNames = Cospi Sinpi
 
-src = $(patsubst %, %.c, $(funcNames))
-obj = $(patsubst %, %, $(funcNames))
+obj = $(patsubst %, %, $(funcNames)) $(patsubst %, %, $(funcPiNames))
 
 all: $(obj)
 
