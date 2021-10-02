@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo -e "\033[1mBuilding Performance Test Suite \033[0m"
-cd overhead_test/float/crlibm
+cd overhead_test/crlibm
 make -s clean
 make -s -f Makefile_gcc10
 cd ../glibc_double
@@ -80,7 +80,7 @@ python3 SpeedupOverIntel.py
 python3 SpeedupOverRlibm32.py
 
 echo -e "\033[1mCleaning Performance Test Suite \033[0m"
-cd overhead_test/float/crlibm
+cd overhead_test/crlibm
 make -s clean
 cd ../glibc_double
 make -s clean
