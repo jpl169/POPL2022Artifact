@@ -356,5 +356,8 @@ float RoundDoubleToFEN(double v, int explength, int bitlength, enum RoundMode rn
     printf("new vminus = %x\n", vminus);
   }
   vminus |= sign;
+  if (*(unsigned long*)&v == 0x3746a5bea046b42e) {
+    printf("new new vminus = %x\n", vminus);
+  }
   return ConvertBinToFP(vminus, explength, bitlength);
 }
