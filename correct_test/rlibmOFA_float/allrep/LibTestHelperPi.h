@@ -34,16 +34,7 @@ double MpfrResult(float x, int* sticky) {
   return mpfr_get_d(mval, MPFR_RNDZ);
 }
 
-double roundToTensorfloat19(double d, mpfr_rnd_t rnd) {
-  int exact = mpfr_set_d(mval, d, rnd);
-  exact = mpfr_check_range(mval, exact, rnd);
-  exact = mpfr_subnormalize(mval, exact, rnd);
-  double result = mpfr_get_d(mval, rnd);
-  return result;
-}
-
 unsigned long RunTestForExponent(int numExpBit) {
-  unsigned long wrongResult = 0;
   mpfr_init2(mval, 500);
   unsigned long totalWrongResult = 0;
 
@@ -62,6 +53,7 @@ unsigned long RunTestForExponent(int numExpBit) {
       double orc = MpfrResult(x, &sticky);
       
       for (int rnd_index = 0; rnd_index < 5; rnd_index++) {
+        unsigned long wrongResult = 0;
         float oracleResult = RoundDoubleToFEN(orc, numExpBit, bitlen, my_rnd_modes[rnd_index], sticky);
         float roundedRes = RoundDoubleToFEN(res, numExpBit, bitlen,
                                              my_rnd_modes[rnd_index], 0);

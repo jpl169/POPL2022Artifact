@@ -41,78 +41,8 @@ float MpfrResult(float x, int numExpBit, unsigned bitlen, mpfr_rnd_t rnd) {
   return result;
 }
 
-double roundToTensorfloat19(double d, mpfr_rnd_t rnd) {
-  int exact = mpfr_set_d(mval, d, rnd);
-  exact = mpfr_check_range(mval, exact, rnd);
-  exact = mpfr_subnormalize(mval, exact, rnd);
-  double result = mpfr_get_d(mval, rnd);
-  return result;
-}
-
-float ConvertBinaryToFP(unsigned binary, int numExpBit, unsigned bitlen) {
-  unsigned numMantissa = bitlen - numExpBit - 1;
-  int bias = (1 << (numExpBit - 1)) - 1;
-  
-  unsigned signBit = binary & (1 << (bitlen - 1));
-  unsigned mantissa = binary & ((1 << numMantissa) - 1);
-  unsigned expBits = binary - signBit - mantissa;
-  expBits >>= numMantissa;
-
-  // First check for special cases:
-  // zero:
-  if (binary == 0 || binary == (1 << (bitlen - 1))) return 0.0;
-  // infinity and nan:
-  if (expBits == (1 << (unsigned)numExpBit) - 1) {
-    if (mantissa == 0) {
-      if (signBit == 0) return 1.0 / 0.0;
-      else return -1.0 / 0.0;
-    }
-
-    return 0.0 / 0.0;
-  }
-
-  // Take care of denormal value
-  if (expBits == 0) {
-    int expVal = 1 - bias;
-
-    // Get position of the first 1 from the left:
-    unsigned mantissaCopy = mantissa;
-    mantissaCopy |= mantissaCopy >> 16;
-    mantissaCopy |= mantissaCopy >> 8;
-    mantissaCopy |= mantissaCopy >> 4;
-    mantissaCopy |= mantissaCopy >> 2;
-    mantissaCopy |= mantissaCopy >> 1;
-    int first1Pos = __builtin_popcount(mantissaCopy);
-    unsigned numZeroInMantissa = numMantissa - first1Pos;
-
-    expVal -= 1 + numZeroInMantissa;
-    mantissa <<= (24 - first1Pos);
-    mantissa &= 0x7FFFFF;
-
-    floatX fX;
-    fX.x = (signBit == 0) ? 0x0 : 0x80000000;
-    fX.x |= mantissa;
-    expVal += 127;
-    unsigned floatExpBit = (unsigned)expVal << 23u;
-    fX.x |= floatExpBit;
-    return fX.f;
-  }
-
-  int expVal = (int)expBits - bias;
-  expVal += 127;
-  unsigned floatExpBit = (unsigned)expVal << 23u;
-  mantissa <<= (23 - numMantissa);
-  
-
-  floatX fX;
-  fX.x = (signBit == 0) ? 0x0 : 0x80000000;
-  fX.x |= mantissa;
-  fX.x |= floatExpBit;
-  return fX.f;
-}
-
 unsigned long RunTestForExponent(int numExpBit) {
-  unsigned long wrongResult = 0;
+  unsigned long totalWrongResult = 0;
 
   for (unsigned bitlen = numExpBit + 2; bitlen <= numExpBit + 24; bitlen++) {
     int bias = (1 << (numExpBit - 1)) - 1;
@@ -131,6 +61,7 @@ unsigned long RunTestForExponent(int numExpBit) {
     
     unsigned step = (bitlen > 16) ? (1u << (bitlen - 16u)) : 1u;
     for (unsigned long count = 0x0; count < upperlimit; count += step) {
+      unsigned long wrongResult = 0;
       float x = ConvertBinToFP((unsigned)count, numExpBit, bitlen);
       double res = __ELEM__(x);
       
