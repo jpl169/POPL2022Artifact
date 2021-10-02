@@ -37,7 +37,7 @@ double MpfrResult(float x, int* sticky) {
 void RunTestForExponent() {
   unsigned long wrongCounts[5];
   for (int i = 0; i < 5; i++) wrongCounts[i] = 0;
-  mpfr_init2(mvalRes, 500);
+  mpfr_init2(mval, 500);
   
   floatX fx;
     
@@ -45,10 +45,10 @@ void RunTestForExponent() {
     int sticky = 0;
     fx.x = count;
     double res = __ELEM__(fx.f);
-    double orc = MpfrResult(fx.f, mval, &sticky);
+    double orc = MpfrResult(fx.f, &sticky);
     
     for (int rnd_index = 0; rnd_index < 5; rnd_index++) {
-      RoundMode rmode = my_rnd_modes[rnd_index];
+      enum RoundMode rmode = my_rnd_modes[rnd_index];
       float oracleRes = RoundDoubleToF8NWithSticky(orc, 32, rmode, sticky);
       float roundedRes = RoundDoubleToF8N(res, 32, rmode);
       
