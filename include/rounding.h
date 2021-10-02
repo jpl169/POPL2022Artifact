@@ -294,7 +294,7 @@ float RoundDoubleToFEN(double v, int explength, int bitlength, enum RoundMode rn
     
     if (exp < 1 - bias) {
       long offset = (1 - bias) - exp;
-      mantissa |= 0x0080000000000000;
+      mantissa |= (1lu << (64lu - explength - 1));
       mantissa >>= (unsigned long)offset;
       exp = 0l;
     }
@@ -338,11 +338,11 @@ float RoundDoubleToFEN(double v, int explength, int bitlength, enum RoundMode rn
     printf("vminus = %x\n", vminus);
   }
   
-  // 9, 2
-  // 0.6875 = 0.1011 = 1.011 * 2^-1
+  // 4, 2
   // exp = 2. bias = 2^(2 - 1) - 1 = 1
   // smallest exp = 1 - bias = 0
   // denormal
+  // 0.6931 = 0.1011...
   //
   
   vminus += roundDecision;
