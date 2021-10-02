@@ -255,7 +255,7 @@ float ConvertBinToFP(unsigned binary, int numExpBit, unsigned bitlen) {
 // explength = 8
 // We assume the double value v is a normal value in double.
 float RoundDoubleToFEN(double v, int explength, int bitlength, enum RoundMode rnd, int sticky) {
-  unsigned numMantissa = bitlength - (8 + 1);
+  unsigned numMantissa = bitlength - (explength + 1);
   
   doubleint temp;
   temp.d = v;
