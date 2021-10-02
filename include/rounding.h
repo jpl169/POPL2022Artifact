@@ -361,5 +361,9 @@ float RoundDoubleToFEN(double v, int explength, int bitlength, enum RoundMode rn
   
   float res = ConvertBinToFP(vminus, explength, bitlength);
   
+  if (*(unsigned long*)&v == 0x3746a5bea046b42e) {
+    printf("new new res = %.50e\n", res);
+  }
+  
   return res;
 }
