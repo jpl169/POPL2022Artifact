@@ -85,9 +85,9 @@ unsigned long RunTestForExponent(int numExpBit) {
       }
     }
     
-    if (wrongResult == 0) printf("Testing FP%u(%u exp bit): check    \r", bitlen, numExpBit);
-    else                  printf("Testing FP%u(%u exp bit): incorrect\r", bitlen, numExpBit);
-    totalWrongResult += wrongResult
+    if (wrongResult == 0) printf("Testing FP%u(%d exp bit): check    \r", bitlen, numExpBit);
+    else                  printf("Testing FP%u(%d exp bit): incorrect\r", bitlen, numExpBit);
+    totalWrongResult += wrongResult;
   }
   
   if (totalWrongResult == 0) printf("FP rep with %u exp bits: check     \n");
