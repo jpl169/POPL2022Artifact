@@ -9,6 +9,7 @@
 #include "math.h"
 #include "mpfr.h"
 
+mpfr_t mval;
 int IsSpecialCase(float, double*);
 
 mpfr_rnd_t rnd_modes[5] = {MPFR_RNDN, MPFR_RNDD, MPFR_RNDU, MPFR_RNDZ, MPFR_RNDNA};
@@ -36,8 +37,6 @@ double MpfrResult(float x, int* sticky) {
 void RunTestForExponent() {
   unsigned long wrongCounts[5];
   for (int i = 0; i < 5; i++) wrongCounts[i] = 0;
-  
-  mpfr_t mval;
   mpfr_init2(mvalRes, 500);
   
   floatX fx;
