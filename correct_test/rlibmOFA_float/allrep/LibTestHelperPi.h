@@ -92,7 +92,7 @@ unsigned long RunTestForExponent(int numExpBit) {
   
   mpfr_clear(mval);
 
-  return wrongResult;
+  return totalWrongResult;
 }
 
 void RunTest(char* logFile) {
