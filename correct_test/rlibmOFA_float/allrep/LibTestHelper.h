@@ -124,6 +124,7 @@ unsigned long RunTestForExponent(int numExpBit) {
     new_emax = emax;
     
     mpfr_init2(mval, bitlen - numExpBit);
+    mpfr_init2(mval200, bitlen - numExpBit + 1);
     
     unsigned long upperlimit = 1lu << (unsigned long)bitlen;
     // Run at most 64K at a time. That's still 5 * 22 * 7 * 64K = 50M tests
@@ -145,6 +146,7 @@ unsigned long RunTestForExponent(int numExpBit) {
     }
     
     mpfr_clear(mval);
+    mpfr_clear(mval200);
   }
 
   return wrongResult;
