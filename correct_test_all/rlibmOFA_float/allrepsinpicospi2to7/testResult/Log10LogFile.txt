@@ -1,0 +1,30 @@
+Checking for numExpBit = 2
+bitlength from 4 to 26
+
+Number Of Wrong Result for Expbit 2: 0
+
+Checking for numExpBit = 3
+bitlength from 5 to 27
+
+Number Of Wrong Result for Expbit 3: 0
+
+Checking for numExpBit = 4
+bitlength from 6 to 28
+
+Number Of Wrong Result for Expbit 4: 0
+
+Checking for numExpBit = 5
+bitlength from 7 to 29
+
+Number Of Wrong Result for Expbit 5: 0
+
+Checking for numExpBit = 6
+bitlength from 8 to 30
+
+Number Of Wrong Result for Expbit 6: 0
+
+Checking for numExpBit = 7
+bitlength from 9 to 31
+
+Number Of Wrong Result for Expbit 7: 0
+
