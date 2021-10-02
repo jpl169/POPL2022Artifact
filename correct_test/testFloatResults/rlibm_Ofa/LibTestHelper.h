@@ -37,6 +37,10 @@ float MpfrResult(float x, mpfr_rnd_t rnd) {
   exact = __MPFR_ELEM__(mval, mval, rnd);
   exact = mpfr_subnormalize(mval, exact, rnd);
   float result = mpfr_get_flt(mval, rnd);
+  
+  mpfr_set_emin(default_emin);
+  mpfr_set_emax(default_emax);
+  
   return result;
 }
 
@@ -44,10 +48,11 @@ void RunTestForExponent() {
   unsigned long wrongCounts[5];
   for (int i = 0; i < 5; i++) wrongCounts[i] = 0;
   
-  mpfr_init2(mval, 24);
-  mpfr_init2(mval200, 25);
   default_emin = mpfr_get_emin();
   default_emax = mpfr_get_emax();
+  
+  mpfr_init2(mval, 24);
+  mpfr_init2(mval200, 25);
   
   floatX fx;
   

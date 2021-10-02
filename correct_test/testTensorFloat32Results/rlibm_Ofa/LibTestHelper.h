@@ -29,6 +29,8 @@ double MpfrResult(float x, mpfr_rnd_t rnd) {
     return RoundDoubleToF8NWithSticky(result, 19, RNA, sticky);
   }
   
+  mpfr_set_emin(-135);
+  mpfr_set_emax(128);
   int exact = mpfr_set_d(mval, x, MPFR_RNDZ);
   exact = mpfr_subnormalize(mval, exact, MPFR_RNDZ);
   
@@ -41,6 +43,9 @@ double MpfrResult(float x, mpfr_rnd_t rnd) {
 void RunTestForExponent() {
   unsigned long wrongCounts[5];
   for (int i = 0; i < 5; i++) wrongCounts[i] = 0;
+  
+  default_emin = mpfr_get_emin();
+  default_emax = mpfr_get_emax();
       
   mpfr_init2(mval, 11);
   mpfr_init2(mval200, 12);
