@@ -332,14 +332,14 @@ float RoundDoubleToFEN(double v, int explength, int bitlength, enum RoundMode rn
       break;
   }
   
-  /*
-  if (v == -6.9314718055994528622676398299518041312694549560546875e-01) {
+  
+  if (*(unsigned long*)&v == 0x3746a5bea046b42e) {
     printf("explen = %d\n", explength);
     printf("bitlen = %d\n", bitlength);
     printf("vminus = %x\n", vminus);
     printf("sign = %d\n", sign);
   }
-   */
+  
   
   // 4, 2
   // exp = 2. bias = 2^(2 - 1) - 1 = 1
