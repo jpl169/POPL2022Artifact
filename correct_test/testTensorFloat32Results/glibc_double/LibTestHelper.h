@@ -11,7 +11,7 @@
 char* rnd_modes_string[5] = {"RNE", "RNN", "RNP", "RNZ", "RNA"};
 enum RoundMode my_rnd_modes[5] = {RNE, RNN, RNP, RNZ, RNA};
 
-void RunTestForExponent(FILE* lfd) {
+void RunTestForExponent() {
   unsigned long wrongCounts[5];
   for (int i = 0; i < 5; i++) wrongCounts[i] = 0;
   
