@@ -336,5 +336,5 @@ float RoundDoubleToFEN(double v, int explength, int bitlength, enum RoundMode rn
   
   vminus += roundDecision;
   vminus |= sign << (bitlength - 1);
-  return ConvertBinaryToFP(vminus, numExpBit, bitlength);
+  return ConvertBinaryToFP(vminus, explength, bitlength);
 }
