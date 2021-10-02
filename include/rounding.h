@@ -214,7 +214,7 @@ float RoundDoubleToFEN(double v, int explength, int bitlength, enum RoundMode rn
   unsigned vminus = 0;
   unsigned roundBit = 0;
   
-  int bias = (1 << (8 - 1)) - 1;
+  int bias = (1 << (explength - 1)) - 1;
   
   
   if (exp < -bias - (int)numMantissa) {
@@ -238,7 +238,7 @@ float RoundDoubleToFEN(double v, int explength, int bitlength, enum RoundMode rn
       mantissa >>= (unsigned long)offset;
       exp = 0l;
     } else {
-      exp += bias;
+      exp += 127;
     }
     
     unsigned long infExt = ((unsigned long)exp << (64 - 1 - explength)) | mantissa;
