@@ -148,6 +148,9 @@ unsigned long RunTestForExponent(int numExpBit) {
     mpfr_clear(mval);
     mpfr_clear(mval200);
   }
+  
+  if (wrongResult == 0) printf("check\n");
+  else printf("uh oh\n");
 
   return wrongResult;
 }
