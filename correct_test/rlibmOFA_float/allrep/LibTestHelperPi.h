@@ -90,8 +90,8 @@ unsigned long RunTestForExponent(int numExpBit) {
     totalWrongResult += wrongResult;
   }
   
-  if (totalWrongResult == 0) printf("FP rep with %u exp bits: check     \n");
-  else                       printf("FP rep with %u exp bits: incorrect \n");
+  if (totalWrongResult == 0) printf("FP reps with %d exp bits: check    \n", numExpBit);
+  else                       printf("FP reps with %d exp bits: incorrect\n", numExpBit);
   
   mpfr_clear(mval);
 
