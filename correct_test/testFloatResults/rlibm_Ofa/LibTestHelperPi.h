@@ -19,7 +19,7 @@ enum RoundMode my_rnd_modes[5] = {RNE, RNN, RNP, RNZ, RNA};
 double MpfrResult(float x, int* sticky) {
   double specCaseRes;
   if (IsSpecialCase(x, &specCaseRes)) {
-    sticky = 0;
+    *sticky = 0;
     return specCaseRes;
   }
   
@@ -30,7 +30,7 @@ double MpfrResult(float x, int* sticky) {
   // Don't need to track exact, because it's guaranteed to be not exact as long
   // as the input is not a special case input.
   __MPFR_ELEM__(mval, mval, MPFR_RNDZ);
-  sticky = 1;
+  *sticky = 1;
   return mpfr_get_d(mval, MPFR_RNDZ);
 }
 
