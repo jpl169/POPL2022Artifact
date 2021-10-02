@@ -244,7 +244,6 @@ float ConvertBinToFP(unsigned binary, int numExpBit, unsigned bitlen) {
   unsigned floatExpBit = (unsigned)expVal << 23u;
   mantissa <<= (23 - numMantissa);
   
-  
   floatX fX;
   fX.x = (signBit == 0) ? 0x0 : 0x80000000;
   fX.x |= mantissa;
@@ -359,5 +358,8 @@ float RoundDoubleToFEN(double v, int explength, int bitlength, enum RoundMode rn
   if (*(unsigned long*)&v == 0x3746a5bea046b42e) {
     printf("new new vminus = %x\n", vminus);
   }
-  return ConvertBinToFP(vminus, explength, bitlength);
+  
+  float res = ConvertBinToFP(vminus, explength, bitlength);
+  
+  return res;
 }
