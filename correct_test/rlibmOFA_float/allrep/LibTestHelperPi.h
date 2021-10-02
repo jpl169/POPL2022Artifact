@@ -56,8 +56,8 @@ unsigned long RunTestForExponent(int numExpBit) {
     unsigned step = (bitlen > 16) ? (1u << (bitlen - 16u)) : 1u;
     for (unsigned long count = 0x0; count < upperlimit; count += step) {
       float x = ConvertBinToFP((unsigned)count, numExpBit, bitlen);
-      double res = __ELEM__(fx.f);
-      double orc = MpfrResult(fx.f, &sticky);
+      double res = __ELEM__(x);
+      double orc = MpfrResult(x, &sticky);
       
       for (int rnd_index = 0; rnd_index < 5; rnd_index++) {
         float oracleResult = RoundDoubleToF8NWithSticky(orc, 32, rmode, sticky);
