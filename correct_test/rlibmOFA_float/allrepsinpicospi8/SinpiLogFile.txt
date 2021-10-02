@@ -1,2 +1,0 @@
-Checking for numExpBit = 8
-bitlength from 10 to 32
