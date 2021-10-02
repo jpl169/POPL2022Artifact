@@ -19,6 +19,9 @@ enum RoundMode my_rnd_modes[5] = {RNE, RNN, RNP, RNZ, RNA};
 double MpfrResult(float x, int* sticky) {
   double specCaseRes;
   if (IsSpecialCase(x, &specCaseRes)) {
+    if (x == 1.07374182400000000000000000000000000000000000000000e+09) {
+      printf("special case\n");
+    }
     *sticky = 0;
     return specCaseRes;
   }
