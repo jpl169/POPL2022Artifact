@@ -145,7 +145,7 @@ unsigned long RunTestForExponent(int numExpBit) {
           if (wrongResult <= 5) {
             printf("count  = %lu\n", count);
             printf("rnd    = %s\n", rnd_modes_string[rnd_index]);
-            printf("x      = %.50e\n", fx.f);
+            printf("x      = %.50e\n", x);
             printf("oracle = %.50e\n", oracleResult);
             printf("res    = %.100e\n", res);
             printf("res    = %lx\n", *(unsigned long*)&res);
