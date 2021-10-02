@@ -237,6 +237,12 @@ float ConvertBinToFP(unsigned binary, int numExpBit, unsigned bitlen) {
     mantissa <<= (24 - first1Pos);
     mantissa &= 0x7FFFFF;
     
+    
+    if (binary == 1 && numExpBit == 8 && bitlen == 10) {
+      printf("expVal = %d\n", expVal);
+      printf("mantissa = %x\n", mantissa);
+    }
+    
     floatX fX;
     fX.x = (signBit == 0) ? 0x0 : 0x80000000;
     fX.x |= mantissa;
