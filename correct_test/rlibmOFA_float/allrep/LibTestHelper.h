@@ -105,7 +105,7 @@ unsigned long RunTestForExponent(int numExpBit) {
     printf("FP reps with %d exp bits: incorrect\n", numExpBit);
   fflush(stdout);
 
-  return wrongResult;
+  return totalWrongResult;
 }
 
 void RunTest(char* logFile) {
