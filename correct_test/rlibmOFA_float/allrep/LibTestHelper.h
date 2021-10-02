@@ -24,7 +24,7 @@ float MpfrResult(float x, int numExpBit, unsigned bitlen, mpfr_rnd_t rnd) {
     if (exact != 0) sticky = 1;
     double result = mpfr_get_d(mval200, MPFR_RNDZ);
     if (mpfr_cmp_d(mval200, result) != 0) sticky = 1;
-    return RoundDoubleToF8N(result, numExpBit, bitlen, RNA, sticky);
+    return RoundDoubleToFEN(result, numExpBit, bitlen, RNA, sticky);
   }
   
   mpfr_set_emin(new_emin);
