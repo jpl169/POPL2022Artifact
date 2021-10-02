@@ -3,7 +3,9 @@ CC = gcc
 funcNames = Log Log2 Log10 Exp Exp10 Exp2 Sinh Cosh
 funcPiNames = Cospi Sinpi
 
-all: $(patsubst %, %, $(funcNames)) $(patsubst %, %, $(funcPiNames))
+obj = $(patsubst %, %, $(funcNames)) $(patsubst %, %, $(funcPiNames))
+
+all: $(obj)
 
 %: %.c
 	$(CC) -frounding-math -fsignaling-nans -O3 -std=c11 -I../../../helper/ -I../../../include/  $^ ../../../lib/float34ROMathLib.a -lmpfr -lgmp -lm -o $@
