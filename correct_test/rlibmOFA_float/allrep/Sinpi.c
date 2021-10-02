@@ -1,6 +1,6 @@
 #define __MPFR_ELEM__ mpfr_sin
 #define	__ELEM__ rlibm34_sinpi
-#include "LibTestHelper.h"
+#include "LibTestHelperPi.h"
 
 int IsSpecialCase(float x, double* specCaseRes) {
   double reduced = fmod(x, 2.0);

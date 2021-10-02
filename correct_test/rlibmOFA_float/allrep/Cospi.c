@@ -1,6 +1,6 @@
 #define __MPFR_ELEM__ mpfr_cos
 #define	__ELEM__ rlibm34_cospi
-#include "LibTestHelper.h"
+#include "LibTestHelperPi.h"
 
 int IsSpecialCase(float x, double* specCaseRes) {
   if (x < 0) x = -x;
