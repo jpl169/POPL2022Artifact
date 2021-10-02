@@ -38,7 +38,7 @@ float MpfrResult(float x, mpfr_rnd_t rnd, FILE* lfd) {
   return result;
 }
 
-void RunTestForExponent(FILE* lfd) {
+void RunTestForExponent() {
   unsigned long wrongCounts[5];
   for (int i = 0; i < 5; i++) wrongCounts[i] = 0;
       
