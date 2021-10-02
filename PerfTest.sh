@@ -96,6 +96,4 @@ cd ../intel_float
 make -s clean
 cd ../intel_rlibm_generic
 make -s clean
-cd ../intel_rlibm32
-make -s clean
 cd ../..
