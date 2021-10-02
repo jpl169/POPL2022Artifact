@@ -168,7 +168,7 @@ unsigned long RunTestForExponent(int numExpBit) {
 }
 
 void RunTest(char* logFile) {
-  for (int i = 8; i <= 8; i++) {
+  for (int i = 2; i <= 8; i++) {
     RunTestForExponent(i);
   }
 }
