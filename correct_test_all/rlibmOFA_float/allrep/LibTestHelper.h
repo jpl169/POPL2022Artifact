@@ -43,7 +43,7 @@ float MpfrResult(float x, int numExpBit, unsigned bitlen, mpfr_rnd_t rnd) {
   return result;
 }
 
-unsigned long RunTestForExponent(int numExpBit, FILE* f) {
+unsigned long RunTestForExponent(int numExpBit, FILE* f, char* FuncName) {
   unsigned long totalWrongResult = 0;
 
   for (unsigned bitlen = numExpBit + 2; bitlen <= numExpBit + 24; bitlen++) {
@@ -74,27 +74,14 @@ unsigned long RunTestForExponent(int numExpBit, FILE* f) {
                                              my_rnd_modes[rnd_index], 0);
 	
         if (oracleResult != oracleResult && roundedRes != roundedRes) continue;
-        if (oracleResult != roundedRes && wrongResult < 10) {
-            wrongResult++;
-          
-          if (wrongResult <= 5) {
-            printf("count  = %lu\n", count);
-            printf("rnd    = %s\n", rnd_modes_string[rnd_index]);
-            printf("x      = %.50e\n", x);
-            printf("oracle = %.50e\n", oracleResult);
-            printf("res    = %.100e\n", res);
-            printf("res    = %lx\n", *(unsigned long*)&res);
-            printf("test   = %.50e\n", roundedRes);
-            printf("res    = %x\n\n", *(unsigned*)&roundedRes);
-          }
-        }
+        if (oracleResult != roundedRes && wrongResult < 10) wrongResult++;
       }
     }
     
     if (wrongResult == 0)
-      fprintf(f, "Testing FP%u(%d exp bit): \033[0;32mcheck\033[0m    \r", bitlen, numExpBit);
+      fprintf(f, "Testing FP%u(%d exp bit): \033[0;32mcheck\033[0m    \r",funcName, bitlen, numExpBit);
     else
-      fprintf(f, "Testing FP%u(%d exp bit): \033[0;31mincorrect\033[0m\r", bitlen, numExpBit);
+      fprintf(f, "Testing FP%u(%d exp bit): \033[0;31mincorrect\033[0m\r",FuncName, bitlen, numExpBit);
     fflush(f);
     totalWrongResult += wrongResult;
     
@@ -106,15 +93,21 @@ unsigned long RunTestForExponent(int numExpBit, FILE* f) {
     fprintf(f, "FP reps with %d exp bits: \033[0;32mcheck\033[0m    \n", numExpBit);
   else
     fprintf(f, "FP reps with %d exp bits: incorrect\n", numExpBit);
-  fflush(f);
+  
+  if (totalWrongResult == 0)
+    printf("FP reps with %d exp bits: \033[0;32mcheck\033[0m    \n", numExpBit);
+  else
+    printf("FP reps with %d exp bits: incorrect\n", numExpBit);
 
   return totalWrongResult;
 }
 
-void RunTest(char* logFile) {
+void RunTest(char* logFile, char* FuncName) {
   FILE* f = fopen(logFile, "w");
+  fprintf(f, "Function: %s\n", FuncName);
+  printf("Function: %s\n", FuncName);
   for (int i = 2; i <= 8; i++) {
-    RunTestForExponent(i, f);
+    RunTestForExponent(i, f, FuncName);
   }
   fclose(f);
 }
