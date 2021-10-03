@@ -1,4 +1,4 @@
 #!/bin/bash
 cd allrep
-make -clean
+make -s clean
 cd ..
