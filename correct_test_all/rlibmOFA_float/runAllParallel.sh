@@ -24,10 +24,10 @@ make -s
 cd ..
 
 #2. Run function generation program in parallel
-echo -e "\033[1m* Generating polynomial. This will take a long time\033[0m"
-echo -e "\033[1m\tRunning generation script in parallel\033[0m"
+echo -e "\033[1m* Checking Correctness of OurLibm. This will take a long time\033[0m"
+echo -e "\033[1m* Especially EXP10 will take roughly 48 hours\033[0m"
+echo -e "\033[1m* When each function is completely tested, it will print the result\033[0m"
+echo -e "\033[1m* In the mean time, you can check the progress in Result/allrep/<function name>.txt\033[0m"
+echo -e "\033[1m\tRunning testing script in parallel\033[0m"
 echo -e "\033[1m\tParallelism: $parallelism jobs\033[0m"
 cat ParallelCommand.txt | parallel -j $parallelism
-
-echo -e "\033[1m* Final result\033[0m"
-cat Result/allrep/*.txt
