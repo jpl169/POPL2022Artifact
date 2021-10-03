@@ -67,9 +67,9 @@ unsigned long RunTestForExponent(int numExpBit, FILE* f, char* FuncName) {
     }
     
     if (wrongResult == 0)
-      fprintf(f, "Testing FP%u(%d exp bit): \033[0;32mcheck\033[0m    \r", funcName, bitlen, numExpBit);
+      fprintf(f, "Testing FP%u(%d exp bit): \033[0;32mcheck\033[0m    \r", bitlen, numExpBit);
     else
-      fprintf(f, "Testing FP%u(%d exp bit): \033[0;31mincorrect\033[0m\r", funcName, bitlen, numExpBit);
+      fprintf(f, "Testing FP%u(%d exp bit): \033[0;31mincorrect\033[0m\r", bitlen, numExpBit);
     fflush(f);
     totalWrongResult += wrongResult;
   }
