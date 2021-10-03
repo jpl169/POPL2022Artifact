@@ -64,7 +64,7 @@ unsigned long RunTestForExponent(int numExpBit, FILE* f, char* FuncName) {
     unsigned long start = bitlen <= MAX_STRIDE ?
                           0 : 1lu << (bitlen - MAX_STRIDE - 1);
     unsigned step = (bitlen > MAX_STRIDE) ? (1u << (bitlen - MAX_STRIDE)) : 1u;
-    for (unsigned long count = start; count < upperlimit; count += step)
+    for (unsigned long count = start; count < upperlimit; count += step) {
       float x = ConvertBinToFP((unsigned)count, numExpBit, bitlen);
       double res = __ELEM__(x);
       
