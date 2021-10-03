@@ -9,7 +9,7 @@
 #include "mpfr.h"
 #include "rounding.h"
 
-#define MAX_STRIDE 17u
+#define MAX_STRIDE 19u
 
 mpfr_t mval, mval200;
 int default_emin, default_emax, new_emin, new_emax;
