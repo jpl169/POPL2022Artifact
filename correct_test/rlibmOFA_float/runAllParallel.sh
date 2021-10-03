@@ -30,6 +30,7 @@ echo -e "\033[1m* When each function is completely tested, it will print the res
 echo -e "\033[1m* In the mean time, you can check the progress in Result/allrep/<function name>.txt\033[0m"
 echo -e "\033[1m\tRunning testing script in parallel\033[0m"
 echo -e "\033[1m\tParallelism: $parallelism jobs\033[0m"
+echo -e "\033[1m\tEstimated Time: 15 minutes \033[0m"
 cat ParallelCommand.txt | parallel -j $parallelism
 
 cd allrep

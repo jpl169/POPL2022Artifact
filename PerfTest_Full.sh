@@ -1,5 +1,5 @@
 #!/bin/bash
-
+echo -e "\033[1mEstimated time: 5 hours \033[0m"
 echo -e "\033[1mBuilding Performance Test Suite \033[0m"
 cd overhead_test_all/crlibm
 make -s clean
