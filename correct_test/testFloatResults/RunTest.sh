@@ -4,7 +4,7 @@ echo    "| function |    Using OurLibm    |    glibc dbl libm   |   Intel dbl li
 echo    "--------------------------------------------------------------------------------------------------------------------------"
 echo    "|          | rne rnn rnp rnz rna | rne rnn rnp rnz rna | rne rnn rnp rnz rna | rne rnn rnp rnz rna | rne rnn rnp rnz rna |"
 echo -n "| ln(x)    |  "
-echo -n "\033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m"
+echo -ne "\033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m"
 echo -n "  |  "
 ./glibc_double/Log
 echo -n "  |  "
@@ -16,7 +16,7 @@ echo -n "  |  "
 echo    "  |"
 
 echo -n "| log2(x)  |  "
-echo -n "\033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m"
+echo -ne "\033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m"
 echo -n "  |  "
 ./glibc_double/Log2
 echo -n "  |  "
@@ -28,7 +28,7 @@ echo -n "  |  "
 echo    "  |"
 
 echo -n "| log10(x) |  "
-echo -n "\033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m"
+echo -ne "\033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m"
 echo -n "  |  "
 ./glibc_double/Log10
 echo -n "  |  "
@@ -40,7 +40,7 @@ echo -n "  |  "
 echo    "  |"
 
 echo -n "| exp(x)   |  "
-echo -n "\033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m"
+echo -ne "\033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m"
 echo -n "  |  "
 ./glibc_double/Exp
 echo -n "  |  "
@@ -52,7 +52,7 @@ echo -n "  |  "
 echo    "  |"
 
 echo -n "| exp2(x)  |  "
-echo -n "\033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m"
+echo -ne "\033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m"
 echo -n "  |  "
 ./glibc_double/Exp2
 echo -n "  |  "
@@ -64,7 +64,7 @@ echo -n "  |  "
 echo    "  |"
 
 echo -n "| exp10(x) |  "
-echo -n "\033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m"
+echo -ne "\033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m"
 echo -n "  |  "
 ./glibc_double/Exp10
 echo -n "  |  "
@@ -76,7 +76,7 @@ echo -n "  |  "
 echo    "  |"
 
 echo -n "| sinh(x)  |  "
-echo -n "\033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m"
+echo -ne "\033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m"
 echo -n "  |  "
 ./glibc_double/Sinh
 echo -n "  |  "
@@ -88,7 +88,7 @@ echo -n "  |  "
 echo    "  |"
 
 echo -n "| cosh(x)  |  "
-echo -n "\033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m"
+echo -ne "\033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m"
 echo -n "  |  "
 ./glibc_double/Cosh
 echo -n "  |  "
@@ -101,7 +101,7 @@ echo -n "  |  "
 echo    "  |"
 
 echo -n "| sinpi(x) |  "
-echo -n "\033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m"
+echo -ne "\033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m"
 echo -n "  |  "
 echo -n "                 "
 echo -n "  |  "
@@ -114,7 +114,7 @@ echo -n "  |  "
 echo    "  |"
 
 echo -n "| cospi(x) |  "
-echo -n "\033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m"
+echo -ne "\033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m   \033[0;32mo\033[0m"
 echo -n "  |  "
 echo -n "                 "
 echo -n "  |  "
