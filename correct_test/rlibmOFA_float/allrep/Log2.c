@@ -4,6 +4,6 @@
 
 int main(int argc, char** argv) {
 
-    RunTest("Log2LogFile.txt");
+    RunTest(argv[1], "Log2");
     return 0;
 }

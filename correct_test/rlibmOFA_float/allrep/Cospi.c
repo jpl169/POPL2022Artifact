@@ -28,6 +28,6 @@ int IsSpecialCase(float x, double* specCaseRes) {
 
 int main(int argc, char** argv) {
 
-    RunTest("CoshLogFile.txt");
+    RunTest(argv[1], "Cospi");
     return 0;
 }

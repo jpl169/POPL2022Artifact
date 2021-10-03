@@ -31,3 +31,7 @@ echo -e "\033[1m* In the mean time, you can check the progress in Result/allrep/
 echo -e "\033[1m\tRunning testing script in parallel\033[0m"
 echo -e "\033[1m\tParallelism: $parallelism jobs\033[0m"
 cat ParallelCommand.txt | parallel -j $parallelism
+
+cd allrep
+make -s clean
+cd ..

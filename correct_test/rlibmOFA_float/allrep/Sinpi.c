@@ -37,6 +37,6 @@ int IsSpecialCase(float x, double* specCaseRes) {
 }
 
 int main(int argc, char** argv) {
-    RunTest("SinpiLogFile.txt");
+    RunTest(argv[1], "Sinpi");
     return 0;
 }

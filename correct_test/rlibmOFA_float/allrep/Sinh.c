@@ -3,6 +3,6 @@
 #include "LibTestHelper.h"
 
 int main(int argc, char** argv) {
-    RunTest("SinhLogFile.txt");
+    RunTest(argv[1], "Sinh");
     return 0;
 }

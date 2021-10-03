@@ -3,6 +3,6 @@
 #include "LibTestHelper.h"
 
 int main(int argc, char** argv) {
-    RunTest("ExpLogFile.txt");
+    RunTest(argv[1], "Exp");
     return 0;
 }
