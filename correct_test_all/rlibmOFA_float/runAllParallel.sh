@@ -15,7 +15,7 @@ then
 fi
 
 mkdir -p Result
-mkdir -p Result/rlibm
+mkdir -p Result/allrep
 
 echo -e "Building correctness testing harness"
 cd rlibm
@@ -30,4 +30,4 @@ echo -e "\033[1m\tParallelism: $parallelism jobs\033[0m"
 cat ParallelCommand.txt | parallel -j $parallelism
 
 echo -e "\033[1m* Final result\033[0m"
-cat Result/rlibm/*.txt
+cat Result/allrep/*.txt
