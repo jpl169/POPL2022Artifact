@@ -95,7 +95,7 @@ unsigned long RunTestForExponent(int numExpBit, FILE* f) {
       fprintf(f, "Testing FP%u(%d exp bit): \033[0;32mcheck\033[0m    \r", bitlen, numExpBit);
     else
       fprintf(f, "Testing FP%u(%d exp bit): \033[0;31mincorrect\033[0m\r", bitlen, numExpBit);
-    fflush(stdout);
+    fflush(f);
     totalWrongResult += wrongResult;
     
     mpfr_clear(mval);
@@ -103,10 +103,10 @@ unsigned long RunTestForExponent(int numExpBit, FILE* f) {
   }
   
   if (totalWrongResult == 0)
-    printf("FP reps with %d exp bits: \033[0;32mcheck\033[0m    \n", numExpBit);
+    fprintf(f, "FP reps with %d exp bits: \033[0;32mcheck\033[0m    \n", numExpBit);
   else
-    printf("FP reps with %d exp bits: incorrect\n", numExpBit);
-  fflush(stdout);
+    fprintf(f, "FP reps with %d exp bits: incorrect\n", numExpBit);
+  fflush(f);
 
   return totalWrongResult;
 }
