@@ -1,149 +1,25 @@
 #!/bin/bash
 
-echo    "| function |    Using OurLibm    |    glibc dbl libm   |   Intel dbl libm    |"
-echo    "----------------------------------------------------------------------------"
-echo    "|          | rne rnn rnp rnz rna | rne rnn rnp rnz rna | rne rnn rnp rnz rna |"
-echo -n "| ln(x)    |  "
-./rlibm_Ofa/Log
-echo -n "  |  "
-./glibc_double/Log
-echo -n "  |  "
-./intel_double/Log
-echo    "  |"
+parallelism=10
 
-echo -n "| log2(x)  |  "
-./rlibm_Ofa/Log2
-echo -n "  |  "
-./glibc_double/Log2
-echo -n "  |  "
-./intel_double/Log2
-echo    "  |"
+while getopts j: flag
+do
+    case "${flag}" in
+        j) parArg=${OPTARG};;
+    esac
+done
 
-echo -n "| log10(x) |  "
-./rlibm_Ofa/Log10
-echo -n "  |  "
-./glibc_double/Log10
-echo -n "  |  "
-./intel_double/Log10
-echo    "  |"
+if [ "$parArg" -eq "$parArg" ] 2>/dev/null
+then
+   parallelism=$parArg
+fi
 
-echo -n "| exp(x)   |  "
-./rlibm_Ofa/Exp
-echo -n "  |  "
-./glibc_double/Exp
-echo -n "  |  "
-./intel_double/Exp
-echo    "  |"
-
-echo -n "| exp2(x)  |  "
-./rlibm_Ofa/Exp2
-echo -n "  |  "
-./glibc_double/Exp2
-echo -n "  |  "
-./intel_double/Exp2
-echo    "  |"
-
-echo -n "| exp10(x) |  "
-./rlibm_Ofa/Exp10
-echo -n "  |  "
-./glibc_double/Exp10
-echo -n "  |  "
-./intel_double/Exp10
-echo    "  |"
-
-echo -n "| sinh(x)  |  "
-./rlibm_Ofa/Sinh
-echo -n "  |  "
-./glibc_double/Sinh
-echo -n "  |  "
-./intel_double/Sinh
-echo    "  |"
-
-echo -n "| cosh(x)  |  "
-./rlibm_Ofa/Cosh
-echo -n "  |  "
-./glibc_double/Cosh
-echo -n "  |  "
-./intel_double/Cosh
-echo    "  |"
-
-echo -n "| sinpi(x) |  "
-./rlibm_Ofa/Sinpi
-echo -n "  |  "
-echo -n "                 "
-echo -n "  |  "
-./intel_double/Sinpi
-echo    "  |"
-
-echo -n "| cospi(x) |  "
-./rlibm_Ofa/Cospi
-echo -n "  |  "
-echo -n "                 "
-echo -n "  |  "
-./intel_double/Cospi
-echo    "  |"
-
-
-
-echo    "| function |    Using Crlibm     |    Using Rlibm32    |"
-echo    "--------------------------------------------------------"
-echo    "|          | rne rnn rnp rnz rna | rne rnn rnp rnz rna |"
-echo -n "| ln(x)    |  "
-./crlibm/Log
-echo -n "  |  "
-./rlibm32/Log
-echo    "  |"
-
-echo -n "| log2(x)  |  "
-./crlibm/Log2
-echo -n "  |  "
-./rlibm32/Log2
-echo    "  |"
-
-echo -n "| log10(x) |  "
-./crlibm/Log10
-echo -n "  |  "
-./rlibm32/Log10
-echo    "  |"
-
-echo -n "| exp(x)   |  "
-./crlibm/Exp
-echo -n "  |  "
-./rlibm32/Exp
-echo    "  |"
-
-echo -n "| exp2(x)  |  "
-echo -n "                 "
-echo -n "  |  "
-./rlibm32/Exp2
-echo    "  |"
-
-echo -n "| exp10(x) |  "
-echo -n "                 "
-echo -n "  |  "
-./rlibm32/Exp10
-echo    "  |"
-
-echo -n "| sinh(x)  |  "
-./crlibm/Sinh
-echo -n "  |  "
-./rlibm32/Sinh
-echo    "  |"
-
-echo -n "| cosh(x)  |  "
-./crlibm/Cosh
-echo -n "  |  "
-./rlibm32/Cosh
-echo    "  |"
-
-echo -n "| sinpi(x) |  "
-./crlibm/Sinpi
-echo -n "  |  "
-./rlibm32/Sinpi
-echo    "  |"
-
-echo -n "| cospi(x) |  "
-./crlibm/Cospi
-echo -n "  |  "
-./rlibm32/Cospi
-echo    "  |"
+echo -e "\033[1m* Checking Correctness of several libraries.\033[0m"
+echo -e "\033[1m* When each function is completely tested, it will print the result\033[0m"
+echo -e "\033[1m\tRunning testing script in parallel\033[0m"
+echo -e "\033[1m\tParallelism: $parallelism jobs\033[0m"
+echo -e ""
+echo    "| function |    Using OurLibm    |    glibc dbl libm   |   Intel dbl libm    |    Using Crlibm     |    Using Rlibm32    |"
+echo    "--------------------------------------------------------------------------------------------------------------------------"
+echo    "|          | rne rnn rnp rnz rna | rne rnn rnp rnz rna | rne rnn rnp rnz rna | rne rnn rnp rnz rna | rne rnn rnp rnz rna |"
+cat ParallelCommand.txt | parallel -j $parallelism

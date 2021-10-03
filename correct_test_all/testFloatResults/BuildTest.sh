@@ -1,8 +1,5 @@
 #!/bin/bash
-cd rlibm_Ofa
-make -s clean
-make -s
-cd ../glibc_double
+cd glibc_double
 make -s clean
 make -s
 cd ../intel_double
