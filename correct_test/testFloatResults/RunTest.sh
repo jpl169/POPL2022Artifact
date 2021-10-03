@@ -94,7 +94,6 @@ echo -n "  |  "
 echo -n "  |  "
 ./intel_double/Cosh
 echo -n "  |  "
-echo -n "| cosh(x)  |  "
 ./crlibm/Cosh
 echo -n "  |  "
 ./rlibm32/Cosh
@@ -107,7 +106,6 @@ echo -n "                 "
 echo -n "  |  "
 ./intel_double/Sinpi
 echo -n "  |  "
-echo -n "| sinpi(x) |  "
 ./crlibm/Sinpi
 echo -n "  |  "
 ./rlibm32/Sinpi
