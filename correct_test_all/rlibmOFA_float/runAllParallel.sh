@@ -18,7 +18,7 @@ mkdir -p Result
 mkdir -p Result/allrep
 
 echo -e "Building correctness testing harness"
-cd rlibm
+cd allrep
 make -s clean
 make -s
 cd ..
