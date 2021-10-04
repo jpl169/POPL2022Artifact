@@ -18,7 +18,7 @@ int main(int argc, char** argv) {
     if (argc == 5) minN = atoi(argv[4]);
     
     std::vector<int> power({1, 2, 3, 4, 5, 6, 7, 8});
-    GeneratePiecewiseFunction(f, log, header, power, minN);
+    GeneratePiecewiseFunction(f, log, header, power, minN, "__log2CoeffsSmall", "");
     
     fclose(f);
     fclose(log);

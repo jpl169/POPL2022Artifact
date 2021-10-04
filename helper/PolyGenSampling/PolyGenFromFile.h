@@ -325,7 +325,7 @@ void FindIndexOfSubDomain(FILE* data, FILE* log, FILE* header,
  #############################################################################*/
 void SplitDomain(FILE* data, FILE* log, FILE* header, vector<int> power,
                  unsigned long firstIndex, unsigned long lastIndex,
-                 unsigned long bitsSame, unsigned long sigBits, int minN) {
+                 unsigned long bitsSame, unsigned long sigBits, int minN, char* coeffName) {
     
     // Determine the minimum and maximum size of piecewise polynomial.
     // By default, it's from 2^NBegin to 2^NEnd.
@@ -351,7 +351,7 @@ void SplitDomain(FILE* data, FILE* log, FILE* header, vector<int> power,
         
         bool completed = true;
         int maxTermNum = 0;
-	int currTermSize = 1;
+        int currTermSize = 1;
         for (unsigned long index = 0; index < totalSplit; index++) {
             // Compute the lower and upper indexes of constraints within the
             // sub-domain #index.
@@ -369,7 +369,7 @@ void SplitDomain(FILE* data, FILE* log, FILE* header, vector<int> power,
                 fprintf(log, "\t\tubindex = %ld\n", ubIndex);
                 // So generate a polynomial for this subdomain
                 unique_ptr<Poly> p =
-		  GeneratePolynomial(data, log, lbIndex, ubIndex, power, currTermSize);
+                GeneratePolynomial(data, log, lbIndex, ubIndex, power, currTermSize);
                 
                 // If we can't, then break out of this loop and split the domain
                 // into smaller sub-domain
@@ -399,9 +399,9 @@ void SplitDomain(FILE* data, FILE* log, FILE* header, vector<int> power,
         // write the coefficients and other information to the header file.
         if (completed) {
             // Write stuff to header file
-            fprintf(header, "unsigned bitsSame = %lu;\n", bitsSame);
-            fprintf(header, "unsigned N = %lu\n", N);
-            fprintf(header, "double coeffs[%lu][%d] = {\n", totalSplit, maxTermNum);
+            fprintf(header, "//unsigned bitsSame = %lu;\n", bitsSame);
+            fprintf(header, "//unsigned N = %lu\n", N);
+            fprintf(header, "double %s[%lu][%d] = {\n", totalSplit, maxTermNum, coeffName);
             for (int i = 0; i < totalSplit; i++) {
                 fprintf(header, "\t{\n");
                 for (int j = 0; j < maxTermNum; j++) {
@@ -440,7 +440,7 @@ void SplitDomain(FILE* data, FILE* log, FILE* header, vector<int> power,
  #############################################################################*/
 void ComputeReducedInputInfo(FILE* data, FILE* log, FILE* header,
                         unsigned long firstIndex, unsigned long lastIndex,
-                        vector<int> power, int minN) {
+                        vector<int> power, int minN, char* coeffName) {
     // Read the first reduced input
     double firstRedX[3], lastRedX[3];
     fseek(data, 3 * sizeof(double) * firstIndex, SEEK_SET);
@@ -465,7 +465,7 @@ void ComputeReducedInputInfo(FILE* data, FILE* log, FILE* header,
     
     // Using these information, split the domain and generate polynomial
     SplitDomain(data, log, header, power, firstIndex, lastIndex,
-                bitsSame, sigBits, minN);
+                bitsSame, sigBits, minN, coeffName);
 }
 
 /*##############################################################################
@@ -476,7 +476,7 @@ void ComputeReducedInputInfo(FILE* data, FILE* log, FILE* header,
  "header" file.
  #############################################################################*/
 void GeneratePiecewiseFunction(FILE* data, FILE* log, FILE* header,
-                               vector<int> power, int minN) {
+                               vector<int> power, int minN, char* coeffName, char* coeffNegName) {
     // Read the first entry (first 24 bytes) and the last entry (last 24 bytes).
     // If the reduced X's have different signs, then let's just solve them
     // separately.
@@ -502,16 +502,16 @@ void GeneratePiecewiseFunction(FILE* data, FILE* log, FILE* header,
         
         fprintf(log, "Generating for negative reduced inputs\n");
         fflush(log);
-        ComputeReducedInputInfo(data, log, header, firstIndex, lastNegIndex, power, minN);
+        ComputeReducedInputInfo(data, log, header, firstIndex, lastNegIndex, power, minN, coeffNegName);
         fprintf(log, "Finished generating polynomials for negative reduced inputs\n");
         fflush(log);
         fprintf(log, "Generating for positive reduced inputs\n");
-        ComputeReducedInputInfo(data, log, header, firstPosIndex, lastIndex, power, minN);
+        ComputeReducedInputInfo(data, log, header, firstPosIndex, lastIndex, power, minN, coeffName);
         fprintf(log, "Finished generating polynomials for positive reduced inputs\n");
         fflush(log);
     } else {
         // Otherwise, just a single piecewise polynomial for all reduced inputs.
         fprintf(log, "Generating polynomials\n");
-        ComputeReducedInputInfo(data, log, header, firstIndex, lastIndex, power, minN);
+        ComputeReducedInputInfo(data, log, header, firstIndex, lastIndex, power, minN, coeffName);
     }
 }

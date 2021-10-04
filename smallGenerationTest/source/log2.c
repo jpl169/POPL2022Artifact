@@ -52,10 +52,13 @@ double rlibm34_log2(float x) {
   // Find the index of polynomial coefficients
   doubleX dX;
   dX.d = f;
-  unsigned long index = (dX.x & 0x01FFFFFFFFFFFFFFlu) >> 49lu;
-  const double* coeffs = __log2Coeffs[index];
+  const double* coeffs = __log2CoeffsSmall[0];
 
-  double y = coeffs[2];
+  double y = coeffs[24];
+  y *= f;
+  y += coeffs[3];
+  y *= f;
+  y += coeffs[2];
   y *= f;
   y += coeffs[1];
   y *= f;
