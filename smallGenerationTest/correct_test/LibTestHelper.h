@@ -92,8 +92,8 @@ void RunTest(char* FileName) {
   munmap(oracle, file_size);
   close(fd);
   if (wrongResult == 0) {
-    printf("Successfully generated log(x) function for x in [1, 2)!\n");
+    printf("\033[0;32mSuccessfully generated log(x) function for x in [1, 2)!\033[0m\n");
   } else {
-    printf("Incorrectly generated log(x) function for x in [1, 2)!\n");
+    printf("\033[0;32mIncorrectly generated log(x) function for x in [1, 2)!\033[0m\n");
   }
 }
