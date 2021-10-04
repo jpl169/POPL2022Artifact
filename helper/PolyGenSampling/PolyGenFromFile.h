@@ -325,7 +325,7 @@ void FindIndexOfSubDomain(FILE* data, FILE* log, FILE* header,
  #############################################################################*/
 void SplitDomain(FILE* data, FILE* log, FILE* header, vector<int> power,
                  unsigned long firstIndex, unsigned long lastIndex,
-                 unsigned long bitsSame, unsigned long sigBits, int minN, const char* coeffName) {
+                 unsigned long bitsSame, unsigned long sigBits, int minN, const char[] coeffName) {
     
     // Determine the minimum and maximum size of piecewise polynomial.
     // By default, it's from 2^NBegin to 2^NEnd.
@@ -440,7 +440,7 @@ void SplitDomain(FILE* data, FILE* log, FILE* header, vector<int> power,
  #############################################################################*/
 void ComputeReducedInputInfo(FILE* data, FILE* log, FILE* header,
                         unsigned long firstIndex, unsigned long lastIndex,
-                        vector<int> power, int minN, const char* coeffName) {
+                        vector<int> power, int minN, const char[] coeffName) {
     // Read the first reduced input
     double firstRedX[3], lastRedX[3];
     fseek(data, 3 * sizeof(double) * firstIndex, SEEK_SET);
@@ -476,7 +476,7 @@ void ComputeReducedInputInfo(FILE* data, FILE* log, FILE* header,
  "header" file.
  #############################################################################*/
 void GeneratePiecewiseFunction(FILE* data, FILE* log, FILE* header,
-                               vector<int> power, int minN, char* coeffName, const char* coeffNegName) {
+                               vector<int> power, int minN, char* coeffName, const char[] coeffNegName) {
     // Read the first entry (first 24 bytes) and the last entry (last 24 bytes).
     // If the reduced X's have different signs, then let's just solve them
     // separately.
