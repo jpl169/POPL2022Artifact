@@ -54,7 +54,7 @@ double rlibm34_log2_small(float x) {
   dX.d = f;
   const double* coeffs = __log2CoeffsSmall[0];
 
-  double y = coeffs[24];
+  double y = coeffs[4];
   y *= f;
   y += coeffs[3];
   y *= f;
