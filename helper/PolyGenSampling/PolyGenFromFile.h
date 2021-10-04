@@ -476,7 +476,7 @@ void ComputeReducedInputInfo(FILE* data, FILE* log, FILE* header,
  "header" file.
  #############################################################################*/
 void GeneratePiecewiseFunction(FILE* data, FILE* log, FILE* header,
-                               vector<int> power, int minN, char* coeffName, std::string coeffNegName) {
+                               vector<int> power, int minN, std::string coeffName, std::string coeffNegName) {
     // Read the first entry (first 24 bytes) and the last entry (last 24 bytes).
     // If the reduced X's have different signs, then let's just solve them
     // separately.
