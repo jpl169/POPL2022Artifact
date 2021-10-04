@@ -1,5 +1,0 @@
-jpl169@skylake:/filer/tmp1/jpl169/NewMathLibrary/GenerateOracleFiles/float34RNDO$ time ./Sinpi Float34ROSinpiOracle
-
-real    475m10.153s
-user    455m30.745s
-sys     0m30.339s

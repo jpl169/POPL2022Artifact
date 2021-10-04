@@ -1,5 +1,0 @@
-jpl169@skylake:/filer/tmp1/jpl169/NewMathLibrary/GenerateOracleFiles/float34RNDO$ time ./Cosh Float34ROCoshOracleData
-
-real    115m15.839s
-user    104m12.967s
-sys     0m37.682s

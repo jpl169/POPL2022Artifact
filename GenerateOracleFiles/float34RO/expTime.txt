@@ -1,5 +1,0 @@
-jpl169@skylake:/filer/tmp1/jpl169/NewMathLibrary/GenerateOracleFiles/float34RNDO$ time ./Exp Float34ROExpOracleApril20
-
-real    111m37.234s
-user    106m43.003s
-sys     0m30.651s

@@ -1,5 +1,0 @@
-jpl169@skylake:/filer/tmp1/jpl169/NewMathLibrary/GenerateOracleFiles/float34RNDO$ time ./Cospi Float34ROCospiOracle
-
-real    301m35.478s
-user    279m4.007s
-sys     0m29.600s
