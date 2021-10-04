@@ -6,6 +6,7 @@ mkdir -p oracles
 cd GenerateOracleFiles
 make -s Log2Small
 ./Log2Small ../oracles/Log2SmallOracle
+cd ..
 
 mkdir -p intervals
 cd IntervalGen
