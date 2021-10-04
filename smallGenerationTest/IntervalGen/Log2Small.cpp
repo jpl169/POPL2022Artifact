@@ -32,62 +32,44 @@ double IntervalGenerator::RangeReduction(float x) {
   doubleX fix;
   fix.d = (double)x;
 
-
-  if (x >= 1.0) {
-    // if x >= 1.0, use this code
-    int m = fix.x >> 52lu;
-    m -= 1023;
-    fix.x &= 0xFFFFFFFFFFFFFlu;
-    fix.x |= 0x3FF0000000000000lu;
-    
-    int onePlusIndex = (int)(fix.d * 128.0);
-    int Findex = onePlusIndex - 128;
-    double f = fix.d - onePlusIndex / 128.0;
-
-    return f * log2OneByF[Findex];
-
-  } else {
-    // if x < 1.0, use this code
-    int m = fix.x >> 52lu;
-    m -= 1022;
-    fix.x &= 0xFFFFFFFFFFFFFlu;
-    fix.x |= 0x3FE0000000000000lu;
-    
-    int onetwentyeightmj = (int)(fix.d * 256.0) + 1;
-    int Findex = 256 - onetwentyeightmj;
-    double f = fix.d - onetwentyeightmj / 256.0;
-    return f * oneByFForLess1[Findex];
+  int m = 0;
+  fix.f = x;
+  if (fix.x < 0x800000) {
+    fix.f *= pow(2, 23);
+    m -= 23;
   }
+  m += fix.x >> 23;
+  m -= 127;
+  fix.x &= 0x007FFFFF;
+  fix.x |= 0x3F800000;
+  
+  fit.x = fix.x & 0x007F0000;
+  int FIndex = fit.x >> 16;
+  fit.x |= 0x3F800000;
+  double F = fit.f;
+  
+  double f = fix.f - F;
+  return f * log2OneByF[FIndex];
 }
     
 double IntervalGenerator::OutputCompensation(float x, double yp) {
-  doubleX fix;
-  fix.d = (double)x;
+  floatX fix, fit;
   
-  if (x >= 1.0) {
-    // if x >= 1.0, use this code
-    int m = fix.x >> 52lu;
-    m -= 1023;
-    fix.x &= 0xFFFFFFFFFFFFFlu;
-    fix.x |= 0x3FF0000000000000lu;
-    
-    int onePlusIndex = (int)(fix.d * 128.0);
-    int Findex = onePlusIndex - 128;
-    
-    return yp + log2Lut[Findex] + m;
-  } else {
-    // if x < 1.0, use this code
-    int m = fix.x >> 52lu;
-    m -= 1022;
-    fix.x &= 0xFFFFFFFFFFFFFlu;
-    fix.x |= 0x3FE0000000000000lu;
-    
-    int onetwentyeightmj = (int)(fix.d * 256.0) + 1;
-    int Findex = 256 - onetwentyeightmj;
-    
-    return yp + log2OneMinusJBy256[Findex] + m;
+  int m = 0;
+  fix.f = x;
+  if (fix.x < 0x800000) {
+    fix.f *= pow(2, 23);
+    m -= 23;
   }
-
+  m += fix.x >> 23;
+  m -= 127;
+  fix.x &= 0x007FFFFF;
+  fix.x |= 0x3F800000;
+  
+  fit.x = fix.x & 0x007F0000;
+  int FIndex = fit.x >> 16;
+  
+  return yp + log2Lut[FIndex] + m;
 }
 
 void IntervalGenerator::GuessInitialLbUb(double x,
