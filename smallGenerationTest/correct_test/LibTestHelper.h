@@ -2,11 +2,13 @@
 #include <stdio.h>
 #include "float34RO_math.h"
 #include <stdlib.h>
+#include <sys/stat.h>
+#include <sys/mman.h>
+#include <errno.h>
 #include <fcntl.h>
 #include <string.h>
 #include <unistd.h>
 #include "math.h"
-#include "mpfr.h"
 
 // MAXVAL = 0111 1111 0111 1111 1111 1111 1111 1111 11
 #define MAXVAL 3.40282361850336062550457001444955389952e+38
