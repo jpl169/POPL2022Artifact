@@ -80,7 +80,12 @@ void RunTest(char* FileName) {
     double oracleResult = oracle[count];
     
     if (oracleResult != oracleResult && res != res) continue;
-    if (oracleResult != res) wrongResult++;
+    if (oracleResult != res) {
+      wrongResult++;
+      printf("res = %.100e\n", res);
+      printf("orc = %.100e\n", oracleResult);
+      printf("\n");
+    }
   }
   
   // Un-mmap oracle file
