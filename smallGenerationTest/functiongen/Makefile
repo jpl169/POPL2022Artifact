@@ -3,9 +3,9 @@ objects = Log2Small
 
 CC=g++
 
-INCLUDES= -I$(SOFTPOSITPATH)/source/include -I$(SOPLEXPATH)/src
+INCLUDES= -I$(SOPLEXPATH)/src
 CPP_FLAGS= -O2 -fvisibility=hidden -fvisibility-inlines-hidden --std=c++17 -I../../helper/
-LD_FLAGS= $(SOFTPOSITPATH)/build/Linux-x86_64-GCC/softposit.a $(SOPLEXPATH)/build/lib/libsoplex.a -lmpfr -lgmp  -lz -lm
+LD_FLAGS= $(SOPLEXPATH)/build/lib/libsoplex.a -lmpfr -lgmp  -lz -lm
 
 all: $(objects)
 
