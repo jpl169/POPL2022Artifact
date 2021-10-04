@@ -4,7 +4,7 @@ objects = Log2Small
 CC=g++
 
 INCLUDES= -I$(SOPLEXPATH)/src
-CPP_FLAGS= -O2 -fvisibility=hidden -fvisibility-inlines-hidden --std=c++17 -I../../helper/
+CPP_FLAGS= -O2 -w -fvisibility=hidden -fvisibility-inlines-hidden --std=c++17 -I../../helper/
 LD_FLAGS= $(SOPLEXPATH)/build/lib/libsoplex.a -lmpfr -lgmp  -lz -lm
 
 all: $(objects)
