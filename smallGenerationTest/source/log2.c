@@ -1,6 +1,6 @@
 #include "float34RO_math.h"
 #include "float34RO_headers/constants.h"
-#include "float34RO_headers/Log2.h"
+#include "float34RO_headers/log2Small.h"
 #include "math.h"
 
 double rlibm34_log2(float x) {
