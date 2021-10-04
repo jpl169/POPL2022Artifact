@@ -7,17 +7,11 @@
 #include <unistd.h>
 #include "math.h"
 #include "mpfr.h"
-#include "rounding.h"
 
-typedef union {
-  double d;
-  unsigned long x;
-} doubleX;
-
-typedef union {
-  float f;
-  unsigned int x;
-} floatX;
+// MAXVAL = 0111 1111 0111 1111 1111 1111 1111 1111 11
+#define MAXVAL 3.40282361850336062550457001444955389952e+38
+// MAXm1VAL = 0111 1111 0111 1111 1111 1111 1111 1111 10
+#define MAXm1VAL 3.40282356779733661637539395458142568448e+38
 
 double RoundToFloat34RO(double val) {
   // Take care of special cases
