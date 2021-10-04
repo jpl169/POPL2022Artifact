@@ -1,6 +1,6 @@
 #define _GNU_SOURCE
 #include <stdio.h>
-#include "float34RO_math.h"
+#include "Log2Small_math.h"
 #include <stdlib.h>
 #include <sys/stat.h>
 #include <sys/mman.h>
