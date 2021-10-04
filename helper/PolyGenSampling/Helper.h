@@ -1,5 +1,15 @@
 #pragma once
 
+union floatint{
+  float f;
+  unsigned int x;
+};
+
+union doubleint{
+  double d;
+  unsigned long long int x;
+};
+
 using namespace std;
 
 template <class T>
