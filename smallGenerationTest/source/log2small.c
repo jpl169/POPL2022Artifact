@@ -3,7 +3,7 @@
 #include "float34RO_headers/log2Small.h"
 #include "math.h"
 
-double rlibm34_log2(float x) {
+double rlibm34_log2_small(float x) {
   floatX fix, fit, spec;
   fix.f = x;
   int m = 0;

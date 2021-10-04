@@ -1,9 +1,9 @@
 CC = gcc
 
-float34ROFNames = log2
+float34ROFNames = log2small
 
-float34ROSrcDir = source/float34RO
-float34ROObjDir = obj/float34RO
+float34ROSrcDir = source
+float34ROObjDir = obj
 libDir = lib
 
 float34ROSrc = $(patsubst %, $(float34ROSrcDir)/%.c, $(float34ROFNames))
