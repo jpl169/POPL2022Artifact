@@ -2,6 +2,8 @@
 
 echo -e "\033[1mGenerating Log2(x) for inputs x in [1, 2) \033[0m"
 echo -e "\033[1mGenerating oracle file \033[0m"
+cd smallGenerationTest
+
 mkdir -p oracles
 cd GenerateOracleFiles
 make -s Log2Small
@@ -11,5 +13,5 @@ cd ..
 mkdir -p intervals
 cd IntervalGen
 make -s Log2Small
-./Log2Small ../oracles/Log2SmallOracle ../intervals/Log2SmallIntervals
+./Log2Small ../intervals/Log2SmallIntervals ../oracles/Log2SmallOracle 
 
