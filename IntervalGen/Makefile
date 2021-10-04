@@ -1,8 +1,8 @@
-objects = Log Log2 Log10 Exp Exp10 Exp2 Cosh Sinh Sinpi Cospi
+objects = Log Log2 Log2Small Log10 Exp Exp10 Exp2 Cosh Sinh Sinpi Cospi
 
 CC=g++
 
-INCLUDES= -I$(SOPLEXPATH)/src -I../../helper/
+INCLUDES= -I$(SOPLEXPATH)/src -I../helper/
 
 CPP_FLAGS= -O2
 
