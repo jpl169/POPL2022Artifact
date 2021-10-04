@@ -397,7 +397,7 @@ void IntervalGenerator2::ComputeReducedIntervals(unsigned long long xlow,
     Xinput.x = inputX;
     float input = Xinput.f;
     double oracleResult;
-    fread(&oracleResult, sizeof(double), 1, oracleFile);
+    size_t size = fread(&oracleResult, sizeof(double), 1, oracleFile);
     ComputeReducedInterval(input, oracleResult, file1, file2);
   }
 }
