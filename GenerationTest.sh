@@ -4,6 +4,7 @@ echo -e "\033[1mGenerating Log2(x) for inputs x in [1, 2) \033[0m"
 echo -e "\033[1mGenerating oracle file \033[0m"
 cd smallGenerationTest
 
+rmdir -rf oracles
 mkdir -p oracles
 cd GenerateOracleFiles
 make -s clean
@@ -12,6 +13,7 @@ make -s Log2Small
 cd ..
 
 echo -e "\033[1mGenerating interval file \033[0m"
+rmdir -rf intervals
 mkdir -p intervals
 cd IntervalGen
 make -s clean
