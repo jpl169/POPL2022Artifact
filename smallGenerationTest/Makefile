@@ -1,6 +1,6 @@
 CC = gcc
 
-float34ROFNames = log log2 log10 exp exp10 exp2 sinh cosh sinpi cospi
+float34ROFNames = log2
 
 float34ROSrcDir = source/float34RO
 float34ROObjDir = obj/float34RO
