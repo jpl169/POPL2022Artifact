@@ -29,9 +29,8 @@ bool IntervalGenerator::ComputeSpecialCase(float x, double& res) {
 }
 
 double IntervalGenerator::RangeReduction(float x) {
-  doubleX fix;
-  fix.d = (double)x;
-
+  floatX fix, fit;
+  
   int m = 0;
   fix.f = x;
   if (fix.x < 0x800000) {
