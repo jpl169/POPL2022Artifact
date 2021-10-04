@@ -47,7 +47,7 @@ double rlibm34_log2(float x) {
   fit.x |= 0x3F800000;
   
   double f = fix.f - fit.f;
-  f *= __log_oneByF[FIndex];
+  f *= __log_oneByF_small[FIndex];
   
   // Find the index of polynomial coefficients
   doubleX dX;
@@ -62,7 +62,7 @@ double rlibm34_log2(float x) {
   y += coeffs[0];
   y *= f;
   
-  y += __log2_lut[FIndex];
+  y += __log2_lut_small[FIndex];
   y += m;
   
   return y;

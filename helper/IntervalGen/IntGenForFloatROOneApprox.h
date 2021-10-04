@@ -176,18 +176,19 @@ void IntervalGenerator::CreateReducedIntervalFile(unsigned long long xlow,
     exit(0);
   }
   
-    string fileNameString = filename;
-    string largeFileName = fileNameString.append("_large");
-    
-    FILE* largeFile = fopen(largeFileName.c_str(), "w+");
-    FILE* of = fopen(oracleFile, "r+");
-    // Initially create a file with all the reduced inputs and intervals
-    ComputeReducedIntervals(xlow, xhigh, largeFile, of);
-    fclose(of);
-    fclose(largeFile);
-    
-    // Sort the interval file and create a file named "filename"
-    SortIntervalFile(largeFileName, filename);
+  string fileNameString = filename;
+  string largeFileName = fileNameString.append("_large");
+  
+  FILE* largeFile = fopen(largeFileName.c_str(), "w+");
+  FILE* of = fopen(oracleFile, "r+");
+  // Initially create a file with all the reduced inputs and intervals
+  ComputeReducedIntervals(xlow, xhigh, largeFile, of);
+  fclose(of);
+  fclose(largeFile);
+  
+  // Sort the interval file and create a file named "filename"
+  SortIntervalFile(largeFileName, filename);
+  remove(largeFileName.c_str());
 }
 
 void IntervalGenerator::SortIntervalFile(string source, string dest) {

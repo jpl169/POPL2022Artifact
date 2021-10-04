@@ -221,8 +221,8 @@ void IntervalGenerator2::CreateReducedIntervalFile(unsigned long long xlow,
     SortIntervalFile(largeFileName2, filename2);
     
     // Delete largeFileName file
-    //remove(largeFileName1.c_str());
-    //remove(largeFileName2.c_str());
+    remove(largeFileName1.c_str());
+    remove(largeFileName2.c_str());
 }
 
 void IntervalGenerator2::SortIntervalFile(string source, string dest) {
