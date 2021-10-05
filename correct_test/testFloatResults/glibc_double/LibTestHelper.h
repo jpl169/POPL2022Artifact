@@ -25,17 +25,24 @@ void RunTestForExponent() {
     double orc = __GEN_ELEM__(fx.f);
     double res = __ELEM__(fx.f);
     
+    if (fx.f == 5.49830607545632921019073167360000000000000000000000e+28) {
+      printf("rlibm = %.50e\n", res);
+      printf("glibc = %.50e\n", orc);
+    }
+
     for (int rnd_index = 0; rnd_index < 5; rnd_index++) {
       double oracleResult = RoundDoubleToF8N(orc, 32, my_rnd_modes[rnd_index]);
       double roundedRes = RoundDoubleToF8N(res, 32, my_rnd_modes[rnd_index]);
       
+      
       if (oracleResult != oracleResult && roundedRes != roundedRes) continue;
       if (oracleResult != roundedRes) {
         wrongCounts[rnd_index]++;
-        if (my_rnd_modes[rnd_index] == RNE) {
-          printf("x   = %.50e\n", fx.f);
-          printf("orc = %.50e\n", oracleResult);
-          printf("res = %.50e\n", roundedRes);
+        if (fx.f == 5.49830607545632921019073167360000000000000000000000e+28) {
+          printf("rnd   = %d\n", rnd_index);
+          printf("x     = %.50e\n", fx.f);
+          printf("orc   = %.50e\n", oracleResult);
+          printf("res   = %.50e\n", roundedRes);
         }
       }
     }
