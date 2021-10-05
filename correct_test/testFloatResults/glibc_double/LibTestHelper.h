@@ -32,7 +32,7 @@ void RunTestForExponent() {
       if (oracleResult != oracleResult && roundedRes != roundedRes) continue;
       if (oracleResult != roundedRes) {
         wrongCounts[rnd_index]++;
-        if (my_rnd_modes[rnd_index] == RNA) {
+        if (my_rnd_modes[rnd_index] == RNE) {
           printf("x   = %.50e\n", fx.f);
           printf("orc = %.50e\n", oracleResult);
           printf("res = %.50e\n", roundedRes);
