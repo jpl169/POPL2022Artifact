@@ -46,7 +46,7 @@ ax.axhline(0.5, color="gray", ls = '--', linewidth = 0.5, zorder = 0)
 ax.axhline(1, color="k", ls = '--', linewidth = 1, zorder = 0)
 ax.axhline(1.5, color="gray", ls = '--', linewidth = 0.5, zorder = 0)
 ax.axhline(2.0, color="k", ls = '--', linewidth = 1, zorder = 0)
-rects1 = ax.bar(x, againstFloat, width, color="tab:orange", label='Speedup over float libm', zorder = 100)
+rects1 = ax.bar(x, againstFloat, width, color="tab:orange", label='Speedup over double libm', zorder = 100)
 
 # Add some text for labels, title and custom x-axis tick labels, etc.
 #plt.xticks(rotation=15, ha="right", rotation_mode="anchor")
