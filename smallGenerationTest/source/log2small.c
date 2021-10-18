@@ -4,6 +4,11 @@
 #include "math.h"
 
 double rlibm34_log2_small(float x) {
+  // This is where special case goes.
+  // For our small example, we have no special case inputs between [1, 2)!
+  
+  // Range Reduction Function
+  // The reduced input is in f.
   floatX fix, fit, spec;
   fix.f = x;
   int m = 0;
@@ -22,8 +27,19 @@ double rlibm34_log2_small(float x) {
   double f = fix.f - fit.f;
   f *= __log_oneByF_small[FIndex];
   
+  // Retrieving the polynomial
   const double* coeffs = __log2CoeffsSmall[0];
 
+  // Compute the polynomial. Make sure to use this format. If evaluating a
+  // polynomial that looks like x + x^3 + x^5 + ...
+  // Then do something like
+  // double x2 = (double)x * x
+  // y = coeffs[3]
+  // y *= x2
+  // y += coeffs[2]
+  // y *= x2 ...
+  // y += coeffs[0]
+  // y *= x ...
   double y = coeffs[4];
   y *= f;
   y += coeffs[3];
@@ -35,6 +51,7 @@ double rlibm34_log2_small(float x) {
   y += coeffs[0];
   y *= f;
   
+  // Output compensation function
   y += __log2_lut_small[FIndex];
   y += m;
   

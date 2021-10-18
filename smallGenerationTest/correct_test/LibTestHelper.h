@@ -71,6 +71,12 @@ void RunTest(char* FileName) {
     exit(0);
   }
   
+  // TODO : This testing script uses the oracle file to check whether we are
+  // printing the oracle value. Hence, we need to make sure that "float x" is
+  // iterating through the input domain correctly, compared to
+  // GenerateOracleFiles.
+  // So make sure to edit the for loop and the initialization of xbase.x correctly
+  // to reflect the input domain.
   for (count = 0x0; count < 0x800000; count++) {
     xbase.x = count + 0x3f800000;
     float x = xbase.f;
