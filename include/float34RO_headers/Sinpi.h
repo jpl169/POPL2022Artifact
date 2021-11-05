@@ -1,3 +1,6 @@
+#ifndef __RLIBM_ALL_SINPI_COEFF__
+#define __RLIBM_ALL_SINPI_COEFF__
+
 //unsigned bitsSame = 6;
 //unsigned N = 2
 double __sinpiCoeffs[4][3] = {
@@ -24,3 +27,4 @@ double __sinpiCoeffs[4][3] = {
 };
 
 
+#endif

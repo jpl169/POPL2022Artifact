@@ -1,5 +1,5 @@
-//unsigned bitsSame = 6;
-//unsigned N = 2
+#ifndef __RLIBM_ALL_COSPI_COEFF__
+#define __RLIBM_ALL_COSPI_COEFF__
 double __cospiCoeffs[4][3] = {
 	{
 		1.0000000000075264239285388612188398838043212890625000000000000000000000000000000000000000000000000000e+00,
@@ -23,4 +23,4 @@ double __cospiCoeffs[4][3] = {
 	}
 };
 
-
+#endif

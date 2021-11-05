@@ -1,3 +1,6 @@
+#ifndef __RLIBM_ALL_SINH_COEFF__
+#define __RLIBM_ALL_SINH_COEFF__
+
 //unsigned bitsSame = 6;
 //unsigned N = 6
 double __sinhCoeffs[64][3] = {
@@ -323,4 +326,4 @@ double __sinhCoeffs[64][3] = {
 	}
 };
 
-
+#endif

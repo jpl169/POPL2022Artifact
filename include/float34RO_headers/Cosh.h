@@ -1,3 +1,6 @@
+#ifndef __RLIBM_ALL_COSH_COEFF__
+#define __RLIBM_ALL_COSH_COEFF__
+
 //unsigned bitsSame = 6;
 //unsigned N = 5
 double __coshCoeffs[32][3] = {
@@ -164,3 +167,4 @@ double __coshCoeffs[32][3] = {
 };
 
 
+#endif
